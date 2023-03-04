@@ -1,4 +1,4 @@
-import MainForgetPassword from '@/components/pages-partials/ForgetPassword'
+import MainForgetPassword from '../../components/pages-partials/ForgetPassword'
 import React from 'react'
 
 const Forgetpassword = () => {

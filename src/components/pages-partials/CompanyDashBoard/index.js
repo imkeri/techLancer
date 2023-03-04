@@ -1,13 +1,13 @@
-import SecondSharedLayout from '../../layout/shared-layout/SecondSharedLayout'
+import FormSharedLayout from '../../layout/shared-layout/FormSharedLayout'
 import React from 'react'
 import MainCompDashBoard from './CompDashBoard'
 
 const MainCompanyDashBoard = () => {
   return (
     <div>
-      <SecondSharedLayout>
+      <FormSharedLayout>
         <MainCompDashBoard />
-      </SecondSharedLayout>
+      </FormSharedLayout>
     </div>
   )
 }

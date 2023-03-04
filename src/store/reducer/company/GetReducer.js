@@ -1,21 +1,21 @@
 export const initialState = {
-    data: {},
-    loading: true,
+  data: {},
+  loading: true,
 };
-  
+
 
 // FETCH COMPANY PROFILE VIEW
 
 export function getCompanyProfileReducer(state = initialState, action) {
-    switch (action.type) {
-      case "COMPANY_VIEW":
-        return { data: action.payload, loading: false };
-      default:
-        return state;
-    }
+  switch (action.type) {
+    case "COMPANY_VIEW":
+      return { data: action.payload, loading: false };
+    default:
+      return state;
   }
+}
 
- // JOB PREFRENCE VIEW
+// JOB PREFRENCE VIEW
 
 export function jobPrefrenceViewReducer(state = initialState, action) {
   switch (action.type) {
@@ -26,9 +26,9 @@ export function jobPrefrenceViewReducer(state = initialState, action) {
   }
 }
 
- // JOB PREFRENCE VIEW BY ID
+// JOB PREFRENCE VIEW BY ID
 
- export function jobPrefrenceViewByIdReducer(state = initialState, action) {
+export function jobPrefrenceViewByIdReducer(state = initialState, action) {
   switch (action.type) {
     case "JOB_PREFRENCE_VIEWBYID":
       return { data: action.payload, loading: false };
@@ -71,9 +71,9 @@ export function internshipViewByCompanyReducer(state = initialState, action) {
   }
 }
 
- // INTERNSHIP VIEW BY ID
+// INTERNSHIP VIEW BY ID
 
- export function internshipViewByIdReducer(state = initialState, action) {
+export function internshipViewByIdReducer(state = initialState, action) {
   switch (action.type) {
     case "INTERNSHIP_VIEWBYID":
       return { data: action.payload, loading: false };
@@ -85,7 +85,7 @@ export function internshipViewByCompanyReducer(state = initialState, action) {
 
 // INTERNSHIP VIEW BY LOCATION
 
- export function internshipViewByLocationReducer(state = initialState, action) {
+export function internshipViewByLocationReducer(state = initialState, action) {
   switch (action.type) {
     case "INTERNSHIP_VIEWBYLOCATION":
       return { data: action.payload, loading: false };
@@ -153,3 +153,27 @@ export function fetchApplyCountReducer(state = initialState, action) {
   }
 }
 
+
+//USER APPLY LIST  JOB 
+
+export function fetchAlluserAppledListReducer(state = initialState, action) {
+  switch (action.type) {
+    case "APPLY_USER_LIST":
+      return { data: action.payload, loading: false };
+    default:
+      return state
+  }
+}
+
+
+
+//USER APPLY LIST  INTERNSHIP 
+
+export function fetchInternshipApplyListReducer(state = initialState, action) {
+  switch (action.type) {
+    case "INTERN_APPLY_USER_LIST":
+      return { data: action.payload, loading: false };
+    default:
+      return state
+  }
+}

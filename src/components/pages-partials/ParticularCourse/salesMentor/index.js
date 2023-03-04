@@ -66,10 +66,10 @@ const SalesMentor = ({ dispatch, res, title, secondtit }) => {
                                 <img src='/img/mentorlogo.png' className='w-[73px] h-[113px]'></img>
                             </div>
                             <div className='mtit '>
-                                <h1 className='xl:lg:text-[50px] md:text-[40px] sm:text-[37px] text-[32px] font-semibold '>{title}</h1>
+                                <h1 className='xl:lg:text-[50px] md:text-[40px] sm:text-[37px] text-[32px] font-semibold uppercase '>{data.title}</h1>
                             </div>
                             <div className='mentorpra '>
-                                <p className='xl:lg:text-[22px] md:[17px] sm:text-[17px]'>{secondtit}</p>
+                                <p className='xl:lg:text-[22px] md:[17px] sm:text-[17px] capitalize'>{data.description}</p>
                             </div>
                         </div>
                         <div className='flex gap-2 lg:justify-start justify-center'>
@@ -96,20 +96,20 @@ const SalesMentor = ({ dispatch, res, title, secondtit }) => {
                 <h1 className='text-center text-[35px] font-semibold'>What will you Master in the Program?</h1>
                 <div className='max-w-7xl mx-auto justify-between items-center px-4 py-5 sm:px-6 sm:py-4 lg:px-4 lg:justify-start lg:space-x-10 mt-[20px]'>
                     <div class="row d-flex justify-content-center  mb-3 dap-3">
+                    <div class="grid md:grid-cols-3 sm:grid-cols-2  gap-4 masterp w-[370px] h-[80
+                                .px] my-[15px]">
                         {
+                            
                             annidata.map((val) => {
                                 return (
                                     <>
-
-                                        <div class="col-md-4 masterp w-[370px] h-[80
-                                        .px] my-[15px]">
                                             <p className='px-1 py-3 text-center text-[15px] '>{val.text}</p>
-                                        </div>
-
                                     </>
                                 )
                             })
+                                
                         }
+                        </div>
                     </div>
                     <div className='getcurri text-center pr-[50px]'>
                         <button className='bg-[#3DC0DF] rounded px-3 py-2 text-[#fff] text-[18px] font-semibold'>GET CURRICULUM</button>

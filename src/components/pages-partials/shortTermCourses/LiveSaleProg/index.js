@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import '../../../../../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import PeopleOutlineIcon from '@mui/icons-material/PeopleOutline';
-import StarBorderOutlinedIcon from '@mui/icons-material/StarBorderOutlined';
 import { fetchtermWiseView } from '../../../../store/action/Comman/getdata'
 import { connect } from 'react-redux';
 import NextLink from 'next/link'
@@ -30,13 +28,13 @@ const LiveSaleProg = ({ dispatch, res }) => {
         <p className='text-center text-[20px] font-medium xl:lg:md:px-[160px]'>Our flagship sales programs teach beneficial skills you don't even know you need.
           Begin something new, break out of a rut or improve your willingness to work.</p>
       </div>
-      <div className='max-w-6xl mx-auto justify-between items-center px-4 py-5 sm:px-6 sm:py-4 lg:px-4 lg:justify-start lg:space-x-10'>
-        <div className='mainfac grid xl:lg:md:grid-cols-2  lg:md:sm:place-content-center flex'>
+      <div className='max-w-6xl mx-auto justify-between items-center px-4 py-5 md:px-6 sm:py-4 lg:px-4 lg:justify-start lg:space-x-10'>
+        <div className='mainfac grid sm:grid-cols-2 place-content-center flex '>
           {
             data.map((val) => {
               return (
                 <>
-                  <div className='d1 ml-[70px]'>
+                  <div className='d1 md:ml-[70px]'>
                     <div className='relative flex'>
                       <div className=' absolute z-20  w-[130px] h-[130px] flex items-center top-10 xl:lg:md:left-[-40px]'>
                         <img src='/img/shrotchirag.png' className=''></img>
@@ -49,18 +47,17 @@ const LiveSaleProg = ({ dispatch, res }) => {
                           <p className='text-[15px]'>{val.role}</p>
                         </div>
                         <div className='teadetail px-3 py-3 bg-[#EFEFEF]  w-[340px] h-[340px]  shadow ml-[-20px]'>
-                          <div className='c1 flex gap-1 mt-[20px]'>
-                            <h5 className='float-left text-[20px] font-semibold'>{val.title}</h5>
-                            <p className='float-right text-[18px] font-semibold flex flex-col bg-[#D9D9D9] rounded px-2 py-1 h-[50px]'>₹999<span className='text-[8px] text-center line-through'>₹4999</span></p>
+                          <div className='c1 flex gap-1 justify-between'>
+                            <h5 className=' text-[20px] font-semibold'>{val.title}</h5>
+                            <p className='text-[18px] font-semibold  bg-[#D9D9D9] rounded px-2 py-3 text-center'>₹{val.fees}</p>
                           </div>
                           <p className='text-[15px] my-3'>Fresh batches every week</p>
                           <hr></hr>
-                          <div className='stud flex gap-3'>
-                            <p className='float-left text-[14px] flex gap-2'><PeopleOutlineIcon className='text-[#D9D9D9] pepoleicon ' />120 Student already enrolled</p>
-                            <p className='float-right bg-[#D9D9D9] W-[55px] h-[32px] px-2 rounded text-[15px] py-1'><StarBorderOutlinedIcon className='staricon text-[#EFEFEF]' />9.0</p>
+                          <div className='stud flex gap-3 max-h-[90px] text-ellipsis overflow-hidden'>
+                            <p> {val.description}</p>
                           </div>
                           <div className='learnmore text-center mt-[20px]'>
-                            <NextLink href={`/shorterm-course/sortterm-course-detail/${val._id}`} onClick={()=>localStorage.setItem("courseId",val._id)}><button className='bg-[#3DC0DF] text-[#fff] uppercase rounded px-2 py-2 hover:bg-[white] hover:text-[#3DC0DF] hover:border hover:border-[#3DC0DF]'>Learn More</button></NextLink>
+                            <NextLink href={`/shorterm-course/sortterm-course-detail/${val._id}`} onClick={() => localStorage.setItem("courseId", val._id)}><button className='bg-[#3DC0DF] text-[#fff] uppercase rounded px-2 py-2 hover:bg-[white] hover:text-[#3DC0DF] hover:border hover:border-[#3DC0DF]'>Learn More</button></NextLink>
                           </div>
                         </div>
                       </div>

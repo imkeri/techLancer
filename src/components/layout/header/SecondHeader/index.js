@@ -1,38 +1,42 @@
 /* This example requires Tailwind CSS v2.0+ */
 import { Fragment, useEffect, useState } from 'react'
 import NextLink from 'next/link'
-import Image from "next/legacy/image";
-import { Popover, Transition, Menu } from '@headlessui/react'
+import { Popover, Transition } from '@headlessui/react'
 import {
     MenuIcon,
     XIcon,
 } from '@heroicons/react/outline'
 import { Dropdown } from "@nextui-org/react";
 import Cookies from "js-cookie";
-import { fetchCompanyView } from "../../../../store/action/compuny/GetData"
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import { fetchUserView } from "../../../../store/action/user/GetData"
 import { connect } from 'react-redux';
-import { useRouter } from 'next/router';
+
 
 
 
 
 const solutions = [
     {
-        name: 'Blogs',
+        name: 'Home',
         description:
             'Get a better understanding of where your traffic is coming from.',
-        href: '#',
+        href: '/sales-academy',
     },
     {
-        name: 'Videos',
+        name: 'courses',
         description: 'Speak directly to your customers in a more meaningful way.',
-        href: '#',
+        href: '/shorterm-course/1',
     },
     {
-        name: 'Sales Academy',
+        name: 'Job',
         description: "Your customers' data will be safe and secure.",
-        href: '#',
+        href: '/view-job',
+    },
+    {
+        name: 'Internship',
+        description: "Your customers' data will be safe and secure.",
+        href: '/view-internship',
     },
     {
         name: 'Contact',
@@ -46,47 +50,31 @@ function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
 
-function SecondHeader({ dispatch, res, userres }) {
+function SecondHeader({ dispatch, userres }) {
 
-    const [join, setJoin] = useState("");
     const [token, setToken] = useState("");
-    const [image, setImage] = useState("");
-    const Router = useRouter();
+    const [name, setName] = useState("");
+    const [value, setvalue] = useState(false);
 
     useEffect(() => {
-        setJoin(localStorage.getItem('joinAs'));
         setToken(Cookies.get('token'));
     }, []);
 
     useEffect(() => {
-        if (join == "user") {
-
-            token && dispatch(fetchUserView());
-        }
-        else {
-            token && dispatch(fetchCompanyView());
-        }
+        token && dispatch(fetchUserView());
     }, [token])
-
-    console.log("image::", image)
-    console.log("join::", join)
-
-
-    useEffect(() => {
-        const data = res.data && res.data.data && res.data.data.data && res.data.data.data;
-        data && setImage(data.image);
-    }, [res])
 
     useEffect(() => {
         const data = userres.data && userres.data.data && userres.data.data.data && userres.data.data.data;
-        data && setImage(data.profile);
+        console.log("data::", data)
+        data && setName(data);
     }, [userres])
 
-    const logout = ()=>{
-       Cookies.set("token", ""); 
-       setImage("");
-       window.location="/";
-       
+    const logout = () => {
+        Cookies.set("token", "");
+        setName("");
+        window.location = "/";
+
     }
 
     return (
@@ -116,17 +104,17 @@ function SecondHeader({ dispatch, res, userres }) {
                     </div>
                     <div className="hidden lg:flex-1 lg:flex lg:items-center lg:justify-center">
 
-                        <Popover.Group as="nav" className="flex space-x-10">
+                        <Popover.Group as="nav" className="xl:ml-32 flex space-x-10">
                             <Popover>
                                 {({ open }) => (
                                     <>
                                         <div
                                             className={classNames(
                                                 open ? 'text-[#000000]' : 'text-[#000000]',
-                                                'group  mr-3 inline-flex items-center xl:text-[18px] lg:text-[15px] text-[18px] font-medium hover:text-gray-900 border-b-2 border-[#fff] hover:border-b-2 hover:border-[#3DC0DF]',
+                                                'group mt-1 mr-3 inline-flex items-center xl:text-[18px] lg:text-[15px] text-[18px] font-medium hover:text-gray-900 border-b-2 border-[#fff] hover:border-b-2 hover:border-[#3DC0DF]',
                                             )}
                                         >
-                                            <span><NextLink href='/' className='no-underline text-[#000] hover:text-gray-700'>Home</NextLink></span>
+                                            <span><NextLink href='/sales-academy' className='no-underline text-[#000] hover:text-gray-700'>Home</NextLink></span>
                                         </div>
                                     </>
                                 )}
@@ -137,10 +125,35 @@ function SecondHeader({ dispatch, res, userres }) {
                                         <div
                                             className={classNames(
                                                 open ? 'text-[#000000]' : 'text-[#000000]',
-                                                'group  mr-3 inline-flex items-center xl:text-[18px] lg:text-[15px] md:text-[10px]  text-[18px] text-base font-medium hover:text-gray-900  hover:border-b-2 border-[#3DC0DF]',
+                                                'group mt-1 mr-3 inline-flex items-center xl:text-[18px] lg:text-[15px] text-[18px] font-medium hover:text-gray-900 border-b-2 border-[#fff] hover:border-b-2 hover:border-[#3DC0DF]',
                                             )}
                                         >
-                                            <span>Videos</span>
+                                            <span><NextLink href='/shorterm-course/1' className='no-underline text-[#000] hover:text-gray-700'>Courses</NextLink></span>
+                                        </div>
+                                    </>
+                                )}
+                            </Popover>
+
+                            <Popover>
+                                {({ open }) => (
+                                    <>
+                                        <div
+                                            className={classNames(
+                                                open ? 'text-[#000000]' : 'text-[#000000]',
+                                                'group mt-1  mr-3 inline-flex items-center xl:text-[18px] lg:text-[15px] md:text-[10px]  text-[18px] text-base font-medium hover:text-gray-900 hover:border-b-2 hover:border-[#3DC0DF]',
+                                            )}
+                                        >
+                                            <div className='revative'>
+                                                <span className='flex'><p className='no-underline text-[#000] hover:text-gray-700 cursor-pointer hover:text-[#000]' onClick={() => setvalue(!value)}>Work<ArrowDropDownIcon/></p></span>
+                                                <div className='absolute top-12 z-20 bg-[#fff]  border-2 rounded-md shadow-lg '>
+                                                    {
+                                                        value && <ul>
+                                                            <li className='hover:bg-slate-300  px-5 py-1 text-[#000] hover:text-[#000] '><NextLink href='/view-job' className='' >Job</NextLink></li>
+                                                            <li className='hover:bg-slate-300  px-5 py-1 text-[#000] hover:text-[#000] '><NextLink href='/view-internship' className='' >internship</NextLink></li>
+                                                        </ul>
+                                                    }
+                                                </div>
+                                            </div>
 
                                         </div>
                                     </>
@@ -152,22 +165,7 @@ function SecondHeader({ dispatch, res, userres }) {
                                         <div
                                             className={classNames(
                                                 open ? 'text-[#000000]' : 'text-[#000000]',
-                                                'group  mr-3 inline-flex items-center xl:text-[18px] lg:text-[15px] md:text-[10px] text-[18px] text-base font-medium hover:text-gray-900  hover:border-b-2 border-[#3DC0DF]',
-                                            )}
-                                        >
-                                            <span><NextLink href='/sales-academy' className='no-underline text-[#000] hover:text-gray-700'>Sales Academy</NextLink></span>
-
-                                        </div>
-                                    </>
-                                )}
-                            </Popover>
-                            <Popover>
-                                {({ open }) => (
-                                    <>
-                                        <div
-                                            className={classNames(
-                                                open ? 'text-[#000000]' : 'text-[#000000]',
-                                                'group  mr-3 inline-flex items-center xl:text-[18px] lg:text-[15px] md:text-[10px] text-[18px] text-base font-medium hover:text-gray-900  hover:border-b-2 border-[#3DC0DF]',
+                                                'group mt-1 mr-3 inline-flex items-center xl:text-[18px] lg:text-[15px] md:text-[10px] text-[18px] text-base font-medium hover:text-gray-900  hover:border-b-2 border-[#3DC0DF]',
                                             )}
                                         >
                                             <span>Contact</span>
@@ -177,45 +175,46 @@ function SecondHeader({ dispatch, res, userres }) {
                                 )}
                             </Popover>
                         </Popover.Group>
+
                         {
-                            image ? <Dropdown>
+                            name ? <div className="flex  items-center lg:justify-end ml-auto"><Dropdown classNames="ml-10 justify-end">
                                 <Dropdown.Button flat>{
-                                    <div className='ml-[70px]'><img src={image} alt="prifile" className="w-[40px] h-[40px] rounded-full"></img></div>
+                                    <div className='ml-[70px] text-[#000] text-[18px] mb-3 group  mr-3 inline-flex items-center xl:text-[18px] lg:text-[15px] md:text-[10px] text-[18px] text-base font-medium hover:text-gray-900  hover:border-b-2 border-[#3DC0DF]'><div className='flex justify-end'><img src={name.profile} alt="" className='w-[30px] h-[30px] mr-2 rounded-full' /></div><p>{name.first_name}</p></div>
                                 }</Dropdown.Button>
                                 <Dropdown.Menu aria-label="Static Actions">
                                     <Dropdown.Item> {
-                                        join && <span><NextLink href={join == "user" ? `/student-dashboard` : `/company-dashboard`} className='no-underline text-[#000] hover:text-gray-700'>Dashboard</NextLink></span>
+                                        <span><NextLink href="/student-dashboard" className='no-underline text-[#000] hover:text-gray-700'>Dashboard</NextLink></span>
                                     }</Dropdown.Item>
                                     <Dropdown.Item ><button onClick={logout}>logout</button></Dropdown.Item>
                                 </Dropdown.Menu>
-                            </Dropdown> : <>
+                            </Dropdown></div> : <>
 
-                                {
-                                    join == 'user' || join == 'company' ?
-                                        <div className="flex  items-center lg:ml-12">
 
-                                            <div className=''>
-                                                <NextLink
-                                                    href={join == "user" ? `/student-login` : `/company-login`}
-                                                    className=" text-[14px] no-underline text-[#3DC0DF] xl:text-[18px] lg:text-[15px]  md:text-[10px]text-[18px] font-extrabold xl:px-[15px] xl:py-[6px] xl:block block border-2 border-[#3DC0DF] rounded-[5px] hover:bg-[#3DC0DF] hover:text-[#fff]">
+                                <div className="flex  items-center lg:justify-end ml-auto">
 
-                                                    Login
+                                    <div className=''>
+                                        <NextLink
+                                            href="/student-login"
+                                            className=" text-[14px] no-underline text-[#3DC0DF] xl:text-[18px] lg:text-[15px]  md:text-[10px]text-[18px] font-extrabold lg:px-[15px] xl:py-[6px] xl:block block border-2 border-[#3DC0DF] rounded-[5px] hover:bg-[#3DC0DF] hover:text-[#fff]">
 
-                                                </NextLink>
+                                            Login
 
-                                            </div>
-                                            <div>
-                                                <NextLink
-                                                    href={join == "user" ? `/student-signup` : `/company-signup`}
-                                                    className="text-[14px] no-underline ml-[10px] text-[#fff] xl:text-[18px] lg:text-[15px] md:text-[10px] text-[18px] font-extrabold xl:px-[15px] xl:py-[6px] xl:py-[6px] xl:block  block border-2 bg-[#3DC0DF] border-[#3DC0DF] rounded-[5px] hover:bg-[#fff] hover:text-[#3DC0DF]">
+                                        </NextLink>
 
-                                                    Sign up
+                                    </div>
+                                    <div>
+                                        <NextLink
+                                            href="/student-signup"
+                                            className="text-[14px] no-underline ml-[10px] text-[#fff] xl:text-[18px] lg:text-[15px] md:text-[10px] text-[18px] font-extrabold lg:px-[15px] xl:py-[6px] xl:py-[6px] xl:block  block border-2 bg-[#3DC0DF] border-[#3DC0DF] rounded-[5px] hover:bg-[#fff] hover:text-[#3DC0DF]">
 
-                                                </NextLink>
-                                            </div>
-                                        </div> : ""
-                                }</>
+                                            Sign up
+
+                                        </NextLink>
+                                    </div>
+                                </div>
+                            </>
                         }
+
                     </div>
                 </div>
             </div>
@@ -271,22 +270,44 @@ function SecondHeader({ dispatch, res, userres }) {
                             </div>
                         </div>
                         <div className="py-6 px-5">
-                            <div className="grid grid-cols-1 gap-4">
-                                <NextLink
-                                    href="/login"
-                                    className="rounded-lg  py-2 no-underline hover:bg-[#3DC0DF] flex justify-center text-[14px] text-[#3DC0DF] font-extrabold px-[20px] py-[6px] border-2 border-[#3DC0DF] rounded-[10px]  hover:text-[#FFF]">
+                            {
+                                name ? <div className="flex"><Dropdown classNames="ml-10 ">
+                                    <Dropdown.Button flat>{
+                                        <div className=' text-[#000] text-[18px] mb-3 group  mr-3 inline-flex items-center xl:text-[18px] lg:text-[15px] md:text-[10px] text-[18px] text-base font-medium hover:text-gray-900  hover:border-b-2 border-[#3DC0DF]'><div className='flex justify-start w-[100%]'><img src={name.profile} alt="" className='w-[30px] h-[30px] mr-2 rounded-full' /><p className='text-[20px] mt-2 item-center'>{name.first_name}</p></div></div>
+                                    }</Dropdown.Button>
+                                    <Dropdown.Menu aria-label="Static Actions">
+                                        <Dropdown.Item> {
+                                            <span><NextLink href="/student-dashboard" className='no-underline text-[#000] hover:text-gray-700'>Dashboard</NextLink></span>
+                                        }</Dropdown.Item>
+                                        <Dropdown.Item ><button onClick={logout}>logout</button></Dropdown.Item>
+                                    </Dropdown.Menu>
+                                </Dropdown></div> : <>
 
-                                    Login
 
-                                </NextLink>
-                            </div>
-                            <div className="mt-6">
-                                <NextLink
-                                    href="/company-signup"
-                                    className="w-full flex  no-underline items-center justify-center px-4 py-2 border border-transparent rounded-lg shadow-sm text-base font-medium text-white bg-[#3DC0DF] hover:bg-[#FFF]">
-                                    Sign up
-                                </NextLink>
-                            </div>
+                                    <div className="flex  items-center lg:justify-end ml-auto">
+
+                                        <div className=''>
+                                            <NextLink
+                                                href="/student-login"
+                                                className=" text-[14px] no-underline text-[#3DC0DF] xl:text-[18px] lg:text-[15px]  md:text-[10px]text-[18px] font-extrabold lg:px-[15px] xl:py-[6px] xl:block block border-2 border-[#3DC0DF] rounded-[5px] hover:bg-[#3DC0DF] hover:text-[#fff]">
+
+                                                Login
+
+                                            </NextLink>
+
+                                        </div>
+                                        <div>
+                                            <NextLink
+                                                href="/student-signup"
+                                                className="text-[14px] no-underline ml-[10px] text-[#fff] xl:text-[18px] lg:text-[15px] md:text-[10px] text-[18px] font-extrabold lg:px-[15px] xl:py-[6px] xl:py-[6px] xl:block  block border-2 bg-[#3DC0DF] border-[#3DC0DF] rounded-[5px] hover:bg-[#fff] hover:text-[#3DC0DF]">
+
+                                                Sign up
+
+                                            </NextLink>
+                                        </div>
+                                    </div>
+                                </>
+                            }
                         </div>
                     </div>
                 </Popover.Panel>
@@ -297,7 +318,6 @@ function SecondHeader({ dispatch, res, userres }) {
 
 
 const mapStateToProps = (state) => ({
-    res: state.fetchCompanyView,
     userres: state.fetchUserView
 })
 export default connect(mapStateToProps)(SecondHeader)

@@ -28,6 +28,8 @@ const MainPersonaldetails = ({ dispatch, res, updateres }) => {
    
 
     const handleInput = (e) => {
+        console.log(e.target.value)
+        console.log(e.target.name)
         const { name, value } = e.target
         setData({ ...data, [name]: value })
     
@@ -44,7 +46,6 @@ const MainPersonaldetails = ({ dispatch, res, updateres }) => {
 
     useEffect(() => {
         const data = res.data && res.data.data && res.data.data.data
-        console.log("data:::::::::::::::::::::::::::",data)
         data && setData(data)
 
     }, [res])
@@ -55,7 +56,7 @@ const MainPersonaldetails = ({ dispatch, res, updateres }) => {
             <ToastContainer />
             <div className='max-w-8xl mx-auto justify-between items-center px-20 sm:px-6 sm:py-4  lg:justify-start lg:space-x-10 '>
                 <div className='row flex gap-5'>
-                    <ProfileSide />
+                    <ProfileSide value="dashboard"/>
 
                     <div className='mainpr max-w-2xl mx-auto justify-between items-center px-0 py-5 sm:px-6 sm:py-4 lg:px-8 lg:justify-start lg:space-x-10 mt-[50px] mb-[50px] border-1'>
                 <div className='border lg:px-[30px]  px-[20px] py-10'>
@@ -98,7 +99,7 @@ const MainPersonaldetails = ({ dispatch, res, updateres }) => {
                             <label className='mx-2 text-[18px] font-semibold ml-4'>Mobile number</label><br></br>
                             <div className='flex gap-3'>
                               
-                                <select className="w-[20%] mt-2  rounded-3xl bg-[#DBDBDB] h-[36px] form-control w-[100%] border-t-0 border-l-0 border-r-0 border-b-0" onChange={handleInput} value={data.phone_code} name="phone_code" >
+                                <select className="w-[30%] mt-2  rounded-3xl bg-[#DBDBDB] h-[36px] form-control  border-t-0 border-l-0 border-r-0 border-b-0" onChange={handleInput} value={data.phone_code} name="phone_code" >
                                 <option >Choose</option>
                                     {
                                         code.map((val) => {
@@ -137,16 +138,16 @@ const MainPersonaldetails = ({ dispatch, res, updateres }) => {
                         <label className='mx-2 text-[18px] font-semibold ml-4'>Preferred language of learning</label>
                         <div className='grid grid-cols-2'>
 
-                            <div className='flex'>
-                               {
-                                data.language == 0? <><input id="link-radio" type="radio" checked name="language" value="0" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 mx-2" onChange={handleInput}  /><p>English</p></>: <><input id="link-radio" type="radio" name="language" value="0" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 mx-2" onChange={handleInput}  /><p>English</p></>
-                               }
-                            </div>
-                            <div className='flex'>
-                               {
-                                data.language == 1 ?<> <input id="link-radio" type="radio" name="language" checked value="1" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 mx-2" onChange={handleInput} /><p>Mother Tongue</p></>:<> <input id="link-radio" type="radio" name="language" value="1" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 mx-2" onChange={handleInput} /><p>Mother Tongue</p></>
-                               }
-                            </div>
+                        <div className='flex'>
+                                    {
+                                        data.language =='1'?<><input id="link-radio" type="radio" checked name="language" value="1" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 mx-2" onChange={handleInput} /><p>English</p></>:<><input id="link-radio" type="radio" name="language" value="1" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 mx-2" onChange={handleInput} /><p>English</p></>
+                                    }
+                                </div>
+                                <div className='flex'>
+                                    {
+                                        data.language =='2' ? <><input id="link-radio" type="radio" checked name="language" value="2" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 mx-2" onChange={handleInput} /><p>Mother tongue</p></> :<><input id="link-radio" type="radio" name="language" value="2" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 mx-2" onChange={handleInput} /><p>Mother tongue</p></>
+                                    }
+                                </div>
 
                         </div>
                     </div>

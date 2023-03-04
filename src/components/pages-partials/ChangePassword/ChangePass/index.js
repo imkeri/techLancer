@@ -14,7 +14,6 @@ const ChangePassword = ({ dispatch, res }) => {
     const [message,setmessage] = useState("")
 
     const changePass = () => {
-        console.log("data:::::::::::::::::::::;===========",data    )
         dispatch(changePassword(data))
     }
 

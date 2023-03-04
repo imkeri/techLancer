@@ -3,7 +3,6 @@ import NextLink from 'next/link';
 import { fetchCompanyView } from "../../../../store/action/compuny/GetData"
 import { CompanyProfileUpadte } from '../../../../store/action/compuny/UpdateData'
 import { connect } from 'react-redux';
-import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ProfileSide from '../Profile/Index'
@@ -65,7 +64,7 @@ const Editprofile = ({ dispatch, res, update }) => {
 
     useEffect(() => {
         const data = update.data && update.data.data
-        if (data) {
+        if (data && data.code==200) {
             if (data.code == 200) {
                 toast.success(data.message, {
                     position: toast.POSITION.TOP_CENTER,
@@ -79,7 +78,7 @@ const Editprofile = ({ dispatch, res, update }) => {
     return (
         <div>
             <ToastContainer />
-            <div className='max-w-8xl mx-auto justify-between items-center px-20 sm:px-6 sm:py-4  lg:justify-start lg:space-x-10 '>
+            <div className='max-w-8xl mx-auto justify-between items-center px-20 sm:px-12 sm:py-4  lg:justify-start lg:space-x-10 '>
                 <div className='row flex gap-5'>
                     <ProfileSide />
 

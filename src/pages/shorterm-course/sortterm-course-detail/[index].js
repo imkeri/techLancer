@@ -17,9 +17,9 @@ const AniruddhaAthawale = () => {
 Distribution Channel in FMCG" secondtit="Learn the Fundamentals and Key Components of Distribution Channel in FMCG Sales" img="/img/anni.png"></SalesMentor>
         <HowItWork />
         <ProgramFor />
-        <Intro img="/img/anniinfo.png" info="An experienced sales trainer & Coach with a bend of mind towards Startups/SME as well as large organization. Exposure of imparting training across India. Works as Business consultant on sales, distribution management for SME, Startups providing consulting services for areas like improving sales Processes, Profitability and General Management" name="Aniruddha Athawale" />
+          {/* <Intro img="/img/anniinfo.png" info="An experienced sales trainer & Coach with a bend of mind towards Startups/SME as well as large organization. Exposure of imparting training across India. Works as Business consultant on sales, distribution management for SME, Startups providing consulting services for areas like improving sales Processes, Profitability and General Management" name="Aniruddha Athawale" /> */}
         <Licended />
-        <GetOffer />
+        {/* <GetOffer /> */}
         <EnrollNow />
         <Question />
       </SecondSharedLayout>

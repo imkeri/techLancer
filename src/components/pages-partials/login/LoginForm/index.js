@@ -27,7 +27,8 @@ const LoginForm = ({ dispatch, res }) => {
 
   useEffect(() => {
     const data = res.data ? res.data.data : []
-  if(data)
+    console.log("helllloo",data)
+  if(data && data.status==200)
   {
     if (data.code == 200) {
       toast.success(data.message, {
@@ -37,6 +38,13 @@ const LoginForm = ({ dispatch, res }) => {
       setInterval(() => {
         window.location='/company'
       }, 1500);
+  }
+  if (data.code == 401) {
+    toast.warning(data.message, {
+      position: toast.POSITION.TOP_CENTER,
+
+    });
+
   }
   }
   }, [res])
@@ -64,7 +72,7 @@ const LoginForm = ({ dispatch, res }) => {
                 <label>Password*</label><br></br>
                 <input type="text" placeholder="password" className='rounded-3xl bg-[#DBDBDB] form-control w-[100%] border-t-0 border-l-0 border-r-0 border-b-0' name='password' value={data.password} onChange={handleChange} />
               </div>
-              <NextLink href="forget-password " className='text-[12px] hover:bg-[#3DC0DF] hover:text-[#202040]'>Forget Password ?</NextLink>
+              <NextLink href="/forget-password " className='text-[12px] hover:bg-[#3DC0DF] hover:text-[#202040] underline'>Forget Password ?</NextLink>
               <div className='text-center'>
                 <button className='btn bg-[#202040] text-[#fff] py-1 px-[30px] rounded-3xl'>Login</button>
               </div>

@@ -53,7 +53,7 @@ const ViewInternship = ({ dispatch, res, resbyid }) => {
 
     return (
         <div>
-            <div className='max-w-8xl  justify-between items-center  sm:px-6 sm:py-4  lg:justify-start lg:space-x-10 '>
+            <div className='max-w-8xl  justify-between items-center  sm:px-12 sm:py-4  lg:justify-start lg:space-x-10 '>
                 <div className='row flex gap-4'>
                     <ProfileSide />
                     <div className='w-[100%] '>
@@ -112,6 +112,7 @@ const ViewInternship = ({ dispatch, res, resbyid }) => {
                                                                 Active
                                                             </button> {dropdown == index + 1 ? <div className='flex flex-col shadow px-3 '>
                                                                 <NextLink href={`/company-dashboard/internship-view/internship-edit/${val._id}`} onClick={() => localStorage.setItem("InernshipId", val._id)} className="cursor-pointer">edit</NextLink>
+                                                                <NextLink href={`/company-dashboard/internship-view/internship-apply/${val._id}`} onClick={() => localStorage.setItem("InernshipId", val._id)} className="cursor-pointer">Apply</NextLink>
                                                                 <button onClick={() => handleOpen(val._id)} className="cursor-pointer">view</button>
                                                                 <div onClick={() => setdropdown(0)}>
                                                                     Close
@@ -122,6 +123,7 @@ const ViewInternship = ({ dispatch, res, resbyid }) => {
                                                             </button>
                                                             {dropdown == index + 1 ? <div className='flex flex-col shadow px-3'>
                                                                 <NextLink href={`/company-dashboard/internship-view/internship-edit/${val._id}`} onClick={() => localStorage.setItem("InernshipId", val._id)} className="cursor-pointer">edit</NextLink>
+                                                                <NextLink href={`/company-dashboard/internship-view/internship-apply/${val._id}`} onClick={() => localStorage.setItem("InernshipId", val._id)} className="cursor-pointer">Apply</NextLink>
                                                                 <button onClick={() => handleOpen(val._id)} className="cursor-pointer">view</button>
                                                                 <div onClick={() => setdropdown(0)} className="cursor-pointer">
                                                                     Close

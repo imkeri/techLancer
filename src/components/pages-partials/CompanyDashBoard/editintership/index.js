@@ -38,7 +38,6 @@ const EditInternship = ({ dispatch, res, updateres }) => {
     }
 
     const postIntanship = () => {
-        console.log("......", data)
         const id = localStorage.getItem('InernshipId')
         dispatch(CompanyIternshipPostUpdate(data, id))
     }
@@ -51,7 +50,7 @@ const EditInternship = ({ dispatch, res, updateres }) => {
 
     useEffect(() => {
         const data = updateres.data && updateres.data.data
-        console.log("res", data)
+        console.log("data:::::::::88",data)
         if (data) {
             if (data.code == 200) {
                 toast.success(data.message, {
@@ -60,27 +59,27 @@ const EditInternship = ({ dispatch, res, updateres }) => {
                 });
 
             }
+            setTimeout(() => {
+                window.location="/company-dashboard/internship-view"
+            }, 2000);
         }
-    }, [res])
+    }, [updateres])
 
     useEffect(() => {
         const data = res.data && res.data.data && res.data.data.data
-        console.log(".......", data)
         data && setData(data)
     }, [res])
 
 
-
-    console.log("check........", data.start_date.slice(0, 10))
     return (
         <>
             <div>
                 <ToastContainer />
-                <div className='max-w-8xl  justify-between items-center  sm:px-6 sm:py-4  lg:justify-start lg:space-x-10 '>
+                <div className='max-w-8xl  justify-between items-center sm:px-12 sm:py-4 lg:justify-start lg:space-x-10 '>
                     <div className='row flex gap-4'>
                         <ProfileSide />
                         <div className='w-[100%] '>
-                            <div className='max-w-5xl mx-auto justify-between items-center px-0 pt-5 sm:px-6 sm:py-4 lg:px-8 lg:justify-start lg:space-x-10 mt-[150px] mb-[50px] rounded'>
+                            <div className='max-w-5xl mx-auto justify-between items-center px-0  sm:px-6 sm:py-4 lg:px-8 lg:justify-start lg:space-x-10 mt-[50px] mb-[50px] rounded'>
                                 <div className='border-2 rounded xl:lg:px-[70px] md:px-[30px] md:px-[20px] px-[20px] py-10'>
                                     <h1 className='text-center text-[35px] font-semibold'>Update an Internship</h1>
                                     <div className='py-2 ml-3'>

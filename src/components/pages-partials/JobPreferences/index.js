@@ -1,13 +1,13 @@
-import SecondSharedLayout from '../../layout/shared-layout/SecondSharedLayout'
+import FormSharedLayout from '../../layout/shared-layout/FormSharedLayout'
 import React from 'react'
 import JobPrefer from './JobPrefer'
 
 const MainJobPreferences = () => {
   return (
     <div>
-      <SecondSharedLayout>
+      <FormSharedLayout>
         <JobPrefer />
-      </SecondSharedLayout>
+      </FormSharedLayout>
     </div>
   )
 }

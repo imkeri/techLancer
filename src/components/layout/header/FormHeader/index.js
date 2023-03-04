@@ -1,41 +1,39 @@
 /* This example requires Tailwind CSS v2.0+ */
-import { Fragment } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import NextLink from 'next/link'
-import Image from "next/legacy/image";
-import { Popover, Transition, Menu } from '@headlessui/react'
-// import '../../../../public/css/Header/header.css';
-import { marketing, applicationUi, ecommerce } from '../../../../constants/navbarElements'
+import { Popover, Transition } from '@headlessui/react'
 import {
-    ChartBarIcon,
-    CheckCircleIcon,
-    CursorClickIcon,
     MenuIcon,
-    PhoneIcon,
-    PlayIcon,
-    ShieldCheckIcon,
-    ViewGridIcon,
     XIcon,
 } from '@heroicons/react/outline'
-import { ChevronDownIcon } from '@heroicons/react/solid'
-import { useDispatch, useSelector } from 'react-redux'
+import { Dropdown } from "@nextui-org/react";
+import Cookies from "js-cookie";
+import { fetchCompanyView } from "../../../../store/action/compuny/GetData"
+import { fetchUserView } from "../../../../store/action/user/GetData"
+import { connect } from 'react-redux';
 
 
 const solutions = [
     {
-        name: 'Blogs',
+        name: 'Home',
         description:
             'Get a better understanding of where your traffic is coming from.',
-        href: '#',
+        href: '/company',
     },
     {
-        name: 'Videos',
+        name: 'courses',
         description: 'Speak directly to your customers in a more meaningful way.',
-        href: '#',
+        href: '/shorterm-course/1',
     },
     {
-        name: 'Sales Academy',
+        name: 'Job',
         description: "Your customers' data will be safe and secure.",
-        href: '#',
+        href: '/view-job',
+    },
+    {
+        name: 'Internship',
+        description: "Your customers' data will be safe and secure.",
+        href: '/view-internship',
     },
     {
         name: 'Contact',
@@ -44,23 +42,37 @@ const solutions = [
     },
 ]
 
-const userNavigation = [
-    { name: 'Settings', href: '/user-settings' },
-    { name: 'Sign out', href: '/' },
-]
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
 
-export default function FormHeader() {
-    const dispatch = useDispatch()
-    const auth = useSelector((state) => state.auth)
+function SecondHeader({ dispatch, userres }) {
 
-    const signOut = async (e) => {
-        e.preventDefault()
-        await dispatch(logout()).unwrap()
+    const [token, setToken] = useState("");
+    const [name, setName] = useState("");
+    const [value, setvalue] = useState(false);
+
+    useEffect(() => {
+        setToken(Cookies.get('token'));
+    }, []);
+
+    useEffect(() => {
+        token && dispatch(fetchCompanyView());
+    }, [token])
+
+    useEffect(() => {
+        const data = userres.data && userres.data.data && userres.data.data.data && userres.data.data.data;
+        data && setName(data);
+    }, [userres])
+
+    const logout = () => {
+        Cookies.set("token", "");
+        setName("");
+        window.location = "/";
+
     }
+
     return (
         <Popover className="relative bg-white">
             <div
@@ -75,7 +87,7 @@ export default function FormHeader() {
                             <span className="sr-only">DriverSales</span>
                             <img
                                 className="h-8 w-auto sm:h-10"
-                                src="../../img/Main Logo.png"
+                                src="/img/Main Logo.png"
                                 alt=""
                             />
                         </NextLink>
@@ -88,17 +100,56 @@ export default function FormHeader() {
                     </div>
                     <div className="hidden lg:flex-1 lg:flex lg:items-center lg:justify-center">
 
-                        <Popover.Group as="nav" className="flex space-x-10">
+                        <Popover.Group as="nav" className="xl:ml-32 flex space-x-10">
                             <Popover>
                                 {({ open }) => (
                                     <>
                                         <div
                                             className={classNames(
                                                 open ? 'text-[#000000]' : 'text-[#000000]',
-                                                'group  mr-3 inline-flex items-center xl:text-[18px] lg:text-[15px] text-[18px] font-medium hover:text-gray-900 border-b-2 border-[#fff] hover:border-b-2 hover:border-[#3DC0DF]',
+                                                'group mt-1 mr-3 inline-flex items-center xl:text-[18px] lg:text-[15px] text-[18px] font-medium hover:text-gray-900 border-b-2 border-[#fff] hover:border-b-2 hover:border-[#3DC0DF]',
                                             )}
                                         >
-                                            <span>Internships</span>
+                                            <span><NextLink href='/company' className='no-underline text-[#000] hover:text-gray-700'>Home</NextLink></span>
+                                        </div>
+                                    </>
+                                )}
+                            </Popover>
+                            <Popover>
+                                {({ open }) => (
+                                    <>
+                                        <div
+                                            className={classNames(
+                                                open ? 'text-[#000000]' : 'text-[#000000]',
+                                                'group mt-1 mr-3 inline-flex items-center xl:text-[18px] lg:text-[15px] text-[18px] font-medium hover:text-gray-900 border-b-2 border-[#fff] hover:border-b-2 hover:border-[#3DC0DF]',
+                                            )}
+                                        >
+                                            <span><NextLink href='/shorterm-course/1' className='no-underline text-[#000] hover:text-gray-700'>Courses</NextLink></span>
+                                        </div>
+                                    </>
+                                )}
+                            </Popover>
+
+                            <Popover>
+                                {({ open }) => (
+                                    <>
+                                        <div
+                                            className={classNames(
+                                                open ? 'text-[#000000]' : 'text-[#000000]',
+                                                'group mt-1  mr-3 inline-flex items-center xl:text-[18px] lg:text-[15px] md:text-[10px]  text-[18px] text-base font-medium hover:text-gray-900 hover:border-b-2 hover:border-[#3DC0DF]',
+                                            )}
+                                        >
+                                            <div className='revative'>
+                                                <span className='flex'><p className='no-underline text-[#000] hover:text-gray-700 cursor-pointer hover:text-[#000]' onClick={() => setvalue(!value)}>Seeker</p></span>
+                                                <div className='absolute top-16 z-20 bg-[#fff]  border-2 rounded-md shadow-lg '>
+                                                    {
+                                                        value && <ul>
+                                                            <li className='hover:bg-slate-300  px-5 py-1 text-[#000] hover:text-[#000] '><NextLink href='/view-job' className='' >Job</NextLink></li>
+                                                            <li className='hover:bg-slate-300  px-5 py-1 text-[#000] hover:text-[#000] '><NextLink href='/view-internship' className='' >internship</NextLink></li>
+                                                        </ul>
+                                                    }
+                                                </div>
+                                            </div>
 
                                         </div>
                                     </>
@@ -110,37 +161,7 @@ export default function FormHeader() {
                                         <div
                                             className={classNames(
                                                 open ? 'text-[#000000]' : 'text-[#000000]',
-                                                'group  mr-3 inline-flex items-center xl:text-[18px] lg:text-[15px] md:text-[10px]  text-[18px] text-base font-medium hover:text-gray-900  hover:border-b-2 border-[#3DC0DF]',
-                                            )}
-                                        >
-                                            <span>Certification Trainings</span>
-
-                                        </div>
-                                    </>
-                                )}
-                            </Popover>
-                            <Popover>
-                                {({ open }) => (
-                                    <>
-                                        <div
-                                            className={classNames(
-                                                open ? 'text-[#000000]' : 'text-[#000000]',
-                                                'group  mr-3 inline-flex items-center xl:text-[18px] lg:text-[15px] md:text-[10px] text-[18px] text-base font-medium hover:text-gray-900  hover:border-b-2 border-[#3DC0DF]',
-                                            )}
-                                        >
-                                            <span>Jobs</span>
-
-                                        </div>
-                                    </>
-                                )}
-                            </Popover>
-                            {/* <Popover>
-                                {({ open }) => (
-                                    <>
-                                        <div
-                                            className={classNames(
-                                                open ? 'text-[#000000]' : 'text-[#000000]',
-                                                'group  mr-3 inline-flex items-center xl:text-[18px] lg:text-[15px] md:text-[10px] text-[18px] text-base font-medium hover:text-gray-900  hover:border-b-2 border-[#3DC0DF]',
+                                                'group mt-1 mr-3 inline-flex items-center xl:text-[18px] lg:text-[15px] md:text-[10px] text-[18px] text-base font-medium hover:text-gray-900  hover:border-b-2 border-[#3DC0DF]',
                                             )}
                                         >
                                             <span>Contact</span>
@@ -148,86 +169,48 @@ export default function FormHeader() {
                                         </div>
                                     </>
                                 )}
-                            </Popover> */}
-
+                            </Popover>
                         </Popover.Group>
-                        {/* <div className="flex  items-center lg:ml-12">
-                        <Menu as="div" className="ml-4 relative flex-shrink-0">
-                                    <div>
-                                        <Menu.Button className="bg-white rounded-full overflow-hidden flex text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                                            <span className="sr-only">Open user menu</span>
-                                            {auth.user?.photoURL ? (
-                                                <Image
-                                                    src={auth.user.photoURL}
-                                                    height={32}
-                                                    width={32}
-                                                    alt="profile-photo"
-                                                />
-                                            ) : (
-                                                <svg
-                                                    className="h-8 w-8 text-gray-300"
-                                                    fill="currentColor"
-                                                    viewBox="0 0 24 24"
-                                                >
-                                                    <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
-                                                </svg>
-                                            )}
-                                        </Menu.Button>
+
+                        {
+                            name ? <div className="flex  items-center lg:justify-end ml-auto"><Dropdown classNames="ml-10 justify-end">
+                                <Dropdown.Button flat>{
+                                    <div className='ml-[70px] text-[#000] text-[18px] mb-3 group  mr-3 inline-flex items-center xl:text-[18px] lg:text-[15px] md:text-[10px] text-[18px] text-base font-medium hover:text-gray-900  hover:border-b-2 border-[#3DC0DF]'><div className='flex justify-end'><img src={name.image} alt="" className='w-[30px] h-[30px] mr-2 rounded-full' /></div><p className='capitalize'>{name.name}</p></div>
+                                }</Dropdown.Button>
+                                <Dropdown.Menu aria-label="Static Actions">
+                                    <Dropdown.Item> {
+                                        <span><NextLink href="/company-dashboard" className='no-underline text-[#000] hover:text-gray-700'>Dashboard</NextLink></span>
+                                    }</Dropdown.Item>
+                                    <Dropdown.Item ><button onClick={logout}>logout</button></Dropdown.Item>
+                                </Dropdown.Menu>
+                            </Dropdown></div> : <>
+
+
+                                <div className="flex  items-center lg:justify-end ml-auto">
+
+                                    <div className=''>
+                                        <NextLink
+                                            href="/company-login"
+                                            className=" text-[14px] no-underline text-[#3DC0DF] xl:text-[18px] lg:text-[15px]  md:text-[10px]text-[18px] font-extrabold lg:px-[15px] xl:py-[6px] xl:block block border-2 border-[#3DC0DF] rounded-[5px] hover:bg-[#3DC0DF] hover:text-[#fff]">
+
+                                            Login
+
+                                        </NextLink>
+
                                     </div>
-                                    <Transition
-                                        as={Fragment}
-                                        enter="transition ease-out duration-100"
-                                        enterFrom="transform opacity-0 scale-95"
-                                        enterTo="transform opacity-100 scale-100"
-                                        leave="transition ease-in duration-75"
-                                        leaveFrom="transform opacity-100 scale-100"
-                                        leaveTo="transform opacity-0 scale-95"
-                                    >
-                                        <Menu.Items className="origin-top-right absolute z-50 right-0 mt-5 w-48 rounded-lg shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-                                            {userNavigation.map((item) => (
-                                                <Menu.Item key={item.name}>
-                                                    {({ active }) => {
-                                                        if (item.name === 'Sign out') {
-                                                            return (
-                                                                (<NextLink
-                                                                    href={item.href}
-                                                                    onClick={(e) => signOut(e)}
-                                                                    className={classNames(
-                                                                        active ? 'bg-gray-100' : '',
-                                                                        'block px-4 py-2 text-sm text-gray-700',
-                                                                    )}>
+                                    <div>
+                                        <NextLink
+                                            href="/company-signup"
+                                            className="text-[14px] no-underline ml-[10px] text-[#fff] xl:text-[18px] lg:text-[15px] md:text-[10px] text-[18px] font-extrabold lg:px-[15px] xl:py-[6px] xl:py-[6px] xl:block  block border-2 bg-[#3DC0DF] border-[#3DC0DF] rounded-[5px] hover:bg-[#fff] hover:text-[#3DC0DF]">
 
-                                                                    {item.name}
+                                            Sign up
 
-                                                                </NextLink>)
-                                                            );
-                                                        } else {
-                                                            return (
-                                                                (<NextLink
-                                                                    href={item.href}
-                                                                    className={classNames(
-                                                                        active ? 'bg-gray-100' : '',
-                                                                        'block px-4 py-2 text-sm text-gray-700',
-                                                                    )}>
+                                        </NextLink>
+                                    </div>
+                                </div>
+                            </>
+                        }
 
-                                                                    {item.name}
-
-                                                                </NextLink>)
-                                                            );
-                                                        }
-                                                    }}
-                                                </Menu.Item>
-                                            ))}
-                                        </Menu.Items>
-                                    </Transition>
-                                </Menu>
-                           
-                             <NextLink
-                                        href="#"
-                                        className="text-[14px] ml-[10px] text-[#fff] xl:text-[18px] lg:text-[15px] md:text-[10px] text-[18px] font-extrabold xl:px-[15px] xl:py-[6px] xl:py-[6px] xl:block md:hidden block border-2 bg-[#3DC0DF] border-[#3DC0DF] rounded-[5px] hover:bg-[#fff] hover:text-[#3DC0DF] uppercase">
-                                        Login/register
-                                    </NextLink>
-                        </div> */}
                     </div>
                 </div>
             </div>
@@ -251,7 +234,7 @@ export default function FormHeader() {
                                 <div>
                                     <img
                                         className="h-8 w-auto"
-                                        src="../img/Main Logo.png"
+                                        src="/img/Main Logo.png"
                                         alt="Workflow"
                                     />
                                 </div>
@@ -283,23 +266,44 @@ export default function FormHeader() {
                             </div>
                         </div>
                         <div className="py-6 px-5">
-                            <div className="grid grid-cols-1 gap-4">
-                                <NextLink
-                                    href="/components"
-                                    className="rounded-lg  py-2  hover:bg-[#3DC0DF] flex justify-center text-[14px] text-[#3DC0DF] font-extrabold px-[20px] py-[6px] border-2 border-[#3DC0DF] rounded-[10px]  hover:text-[#FFF]">
+                        {
+                            name ? <div className="flex  items-center lg:justify-end ml-auto"><Dropdown classNames="ml-10 justify-end">
+                                <Dropdown.Button flat>{
+                                    <div className='ml-[70px] text-[#000] text-[18px] mb-3 group  mr-3 inline-flex items-center xl:text-[18px] lg:text-[15px] md:text-[10px] text-[18px] text-base font-medium hover:text-gray-900  hover:border-b-2 border-[#3DC0DF]'><div className='flex justify-end'><img src={name.image} alt="" className='w-[30px] h-[30px] mr-2 rounded-full' /></div><p className='capitalize'>{name.name}</p></div>
+                                }</Dropdown.Button>
+                                <Dropdown.Menu aria-label="Static Actions">
+                                    <Dropdown.Item> {
+                                        <span><NextLink href="/company-dashboard" className='no-underline text-[#000] hover:text-gray-700'>Dashboard</NextLink></span>
+                                    }</Dropdown.Item>
+                                    <Dropdown.Item ><button onClick={logout}>logout</button></Dropdown.Item>
+                                </Dropdown.Menu>
+                            </Dropdown></div> : <>
 
-                                    Login
 
-                                </NextLink>
-                            </div>
-                            <div className="mt-6">
-                                <NextLink
-                                    href="/register"
-                                    className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-lg shadow-sm text-base font-medium text-white bg-[#3DC0DF] hover:bg-[#FFF]">
+                                <div className="flex  items-center lg:justify-end ml-auto">
 
-                                    Sign up
-                                </NextLink>
-                            </div>
+                                    <div className=''>
+                                        <NextLink
+                                            href="/company-login"
+                                            className=" text-[14px] no-underline text-[#3DC0DF] xl:text-[18px] lg:text-[15px]  md:text-[10px]text-[18px] font-extrabold lg:px-[15px] xl:py-[6px] xl:block block border-2 border-[#3DC0DF] rounded-[5px] hover:bg-[#3DC0DF] hover:text-[#fff]">
+
+                                            Login
+
+                                        </NextLink>
+
+                                    </div>
+                                    <div>
+                                        <NextLink
+                                            href="/company-signup"
+                                            className="text-[14px] no-underline ml-[10px] text-[#fff] xl:text-[18px] lg:text-[15px] md:text-[10px] text-[18px] font-extrabold lg:px-[15px] xl:py-[6px] xl:py-[6px] xl:block  block border-2 bg-[#3DC0DF] border-[#3DC0DF] rounded-[5px] hover:bg-[#fff] hover:text-[#3DC0DF]">
+
+                                            Sign up
+
+                                        </NextLink>
+                                    </div>
+                                </div>
+                            </>
+                        }
                         </div>
                     </div>
                 </Popover.Panel>
@@ -307,3 +311,9 @@ export default function FormHeader() {
         </Popover>
     );
 }
+
+
+const mapStateToProps = (state) => ({
+    userres: state.fetchCompanyView
+})
+export default connect(mapStateToProps)(SecondHeader)

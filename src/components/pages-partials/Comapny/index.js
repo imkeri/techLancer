@@ -1,5 +1,5 @@
 
-import SecondSharedLayout from '../../layout/shared-layout/SecondSharedLayout'
+import FormSharedLayout from '../../layout/shared-layout/FormSharedLayout'
 import React from 'react'
 import Partners from '../home/hero/Partners'
 import AchieveMents from '../home/SalesTelent/AchieveMent'
@@ -14,7 +14,7 @@ import SaleStory from './SaleStory'
 const MainComapany = () => {
   return (
     <div>
-      <SecondSharedLayout>
+      <FormSharedLayout>
       <CompanyHero />
         <Partners />
         <CompanyRightSale />
@@ -24,7 +24,7 @@ const MainComapany = () => {
         <ClientSay/>
         <Question/>
         <SaleStory/>
-      </SecondSharedLayout>
+      </FormSharedLayout>
     </div>
   )
 }

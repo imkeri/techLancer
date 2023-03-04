@@ -1,13 +1,13 @@
 import React from 'react'
 import EditInternship from '../../../../components/pages-partials/CompanyDashBoard/editintership/index'
-import SecondSharedLayout from '../../../../components/layout/shared-layout/SecondSharedLayout'
+import FormSharedLayout from '../../../../components/layout/shared-layout/FormSharedLayout'
 
 const index = () => {
   return (
     <div>
-        <SecondSharedLayout>
+        <FormSharedLayout>
         <EditInternship/>
-        </SecondSharedLayout>
+        </FormSharedLayout>
        
     </div>
   )

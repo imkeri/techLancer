@@ -71,6 +71,28 @@ export function internshipPostReducer(state = initialState, action) {
   }
 }
 
+// INTERVIEW LINK 
+
+export function internviewLinkGenrateReducer(state = initialState, action) {
+  switch (action.type) {
+    case "INTERVIEW_LINK":
+      return { data: action.payload, loading: false };
+    default:
+      return state;
+  }
+}
+
+// INTERVIEW LINK 
+
+export function internviewLinkInternshipGenrateReducer(state = initialState, action) {
+  switch (action.type) {
+    case "INTERVIEW_LINK_INTRENSHIP":
+      return { data: action.payload, loading: false };
+    default:
+      return state;
+  }
+}
+
 
 
 

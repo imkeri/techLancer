@@ -4,6 +4,7 @@ import { jobPrefrenceAdd } from '../../../../store/action/compuny/AddData'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ProfileSide from '../../CompanyDashBoard/Profile/Index';
+import Router from 'next/router'
 
 const JobPrefer = ({ dispatch, res }) => {
     const [data, setData] = useState({
@@ -29,8 +30,7 @@ const JobPrefer = ({ dispatch, res }) => {
     useEffect(() => {
 
         const data = res.data && res.data.data
-        console.log("data:::::::;;;=====", data)
-        if (data) {
+        if (data && data.code == 201) {
             if (data.code == 201) {
                 toast.success(data.message, {
                     position: toast.POSITION.TOP_CENTER,
@@ -38,6 +38,11 @@ const JobPrefer = ({ dispatch, res }) => {
                 });
 
             }
+            setTimeout(() => {
+                window.location="job-view"
+                // Router.push('job-view')
+            }, 1500);
+            
         }
     }, [res])
 
@@ -46,7 +51,7 @@ const JobPrefer = ({ dispatch, res }) => {
     return (
         <div>
             <ToastContainer />
-            <div className='max-w-8xl  justify-between items-center sm:px-6 sm:py-2  lg:justify-start lg:space-x-10 '>
+            <div className='max-w-8xl  justify-between items-center sm:px-12 px-10 sm:py-2  lg:justify-start lg:space-x-10 '>
                 <div className='row flex gap-4'>
                     <ProfileSide />
                     <div className='w-[100%] '>
@@ -86,13 +91,14 @@ const JobPrefer = ({ dispatch, res }) => {
                                 <div className='py-2'>
                                     <label className='mx-3  text-[18px] font-semibold'>Active</label><br></br>
                                     <div className='mx-3 lookfor flex gap-[67px]'>
-                                        <div className='flex gap-3'>
-                                            <input type="radio" name="active" value="0" className='w-[25px] h-[25px] bg-[#D9D9D9] rounded border-t-0 border-l-0 border-r-0 border-b-0' onChange={handleInput}></input>
-                                            <p className='text-[18px] font-medium'>not-active</p>
-                                        </div>
+                                        
                                         <div className='flex gap-3'>
                                             <input type="radio" name="active" value="1" className='w-[25px] h-[25px] bg-[#D9D9D9] rounded border-t-0 border-l-0 border-r-0 border-b-0' onChange={handleInput}></input>
                                             <p className='text-[18px] font-medium'>active</p>
+                                        </div>
+                                        <div className='flex gap-3'>
+                                            <input type="radio" name="active" value="0" className='w-[25px] h-[25px] bg-[#D9D9D9] rounded border-t-0 border-l-0 border-r-0 border-b-0' onChange={handleInput}></input>
+                                            <p className='text-[18px] font-medium'>not-active</p>
                                         </div>
                                     </div>
                                 </div>

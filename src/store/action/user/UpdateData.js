@@ -94,3 +94,36 @@ export function UserProfileRemove() {
        }
     };
 }
+
+
+
+
+// USER CAREER DETAIL UPDATE
+
+export function careerDetailUpadte(id,data) {
+    console.log(id)
+   
+    return async (dispatch) => {
+       try {
+        const response = await axios.put(`${Baseurl}/career/update-career/${id}`,data,{
+            headers:{
+                "Authorization":token
+            }
+        });
+        console.log("response:::",response)
+
+        var return_response = {
+            type: "CAREER_UPADTE",
+            payload: response,
+        };
+        dispatch(return_response);
+       } catch (error) {
+        console.log("error:::",error)
+        var return_response = {
+            type: "CAREER_UPADTE",
+            payload: error,
+        };
+        dispatch(return_response);
+       }
+    };
+}

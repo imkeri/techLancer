@@ -1,13 +1,13 @@
 import React from 'react'
 import Editeprofile from '../../../components/pages-partials/CompanyDashBoard/Editprofile/index'
-import SecondSharedLayout from '../../../components/layout/shared-layout/SecondSharedLayout/index'
+import FormSharedLayout from '../../../components/layout/shared-layout/FormSharedLayout'
 
 const index = () => {
   return (
     <div>
-        <SecondSharedLayout>
+        <FormSharedLayout>
         <Editeprofile/>
-        </SecondSharedLayout>
+        </FormSharedLayout>
         
     </div>
   )

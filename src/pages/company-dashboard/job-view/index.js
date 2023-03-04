@@ -1,12 +1,12 @@
 import React from 'react'
-import SecondSharedLayout from '../../../components/layout/shared-layout/SecondSharedLayout'
+import FormSharedLayout from '../../../components/layout/shared-layout/FormSharedLayout'
 import ViewJob from '../../../components/pages-partials/CompanyDashBoard/jobView/index'
 
 const ViewView = () => {
   return (
-    <div><SecondSharedLayout>
+    <div><FormSharedLayout>
       <ViewJob/>
-    </SecondSharedLayout></div>
+    </FormSharedLayout></div>
   )
 }
 

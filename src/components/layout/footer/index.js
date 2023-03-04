@@ -78,13 +78,11 @@ const navigation = {
 
 export default function Footer() {
   return (
-    <footer className="bg-[#212A41]" aria-labelledby="footer-heading">
-      <h2 id="footer-heading" className="sr-only">
-        Footer
-      </h2>
-      <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-16">
-        <div className="xl:grid xl:grid-cols-5">
-          <div className="space-y-3 xl:col-span-2">
+    <>
+      <footer className="bg-[#212A41]">
+
+        <div className="grid lg:grid-cols-5 md:grid-cols-2 grid-cols-1 xl:px-44 px-20 py-10">
+          <div className="md:col-span-2 mt-2">
             <img
               className="h-8 w-auto sm:h-10 mb-[30px]"
               src="/img/Asset 6 1.png "
@@ -129,55 +127,58 @@ export default function Footer() {
               ))}
             </ul>
           </div>
-          <div className="footul lg:xl:md:mt-0 sm:mt-5 lg:ml-[30px] sm:md:ml-[0px]" >
-            <h3 className="text-sm mt-3 text-[28px] font-bold text-[#fff] tracking-wider">
-              About Us
-            </h3>
-            <div className="w-[30%] h-[2%] bg-[#3DC0DF] my-2"></div>
-            <ul role="list" className="mt-4 space-y-2">
-              {navigation.support.map((item) => (
-                <li key={item.name} className="leading-none">
-                  <a
-                    href={item.href}
-                    className="text-[#fff] text-[18px] no-underline"
-                  >
-                    {item.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
+          <div className="footul lg:xl:md:mt-0 sm:mt-5">
+              <h3 className="text-sm mt-3 text-[28px] font-bold text-[#fff] tracking-wider">
+                About Us
+              </h3>
+              <div className="w-[30%] h-[2%] bg-[#3DC0DF] my-2"></div>
+              <ul role="list" className="mt-4 space-y-2">
+                {navigation.support.map((item) => (
+                  <li key={item.name} className="leading-none">
+                    <a
+                      href={item.href}
+                      className="text-[#fff] text-[18px] no-underline"
+                    >
+                      {item.name}
+                    </a>
+                  </li>
+                ))}
+              </ul>
           </div>
           <div className="footul lg:xl:md:mt-0 sm:mt-5">
-            <h3 className="text-sm text-[28px] mt-3 font-bold text-[#fff]  tracking-wider">
-              Company
-            </h3>
-            <div className="w-[25%] h-[2%] bg-[#3DC0DF] my-2"></div>
-            <ul role="list" className="mt-4 space-y-2">
-              {navigation.company.map((item) => (
-                <li key={item.name} className="leading-none">
-                  <a
-                    href={item.href}
-                    className="text-[#fff] text-[18px] no-underline"
-                  >
-                    {item.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
+              <h3 className="text-sm text-[28px] mt-3 font-bold text-[#fff]  tracking-wider">
+                Company
+              </h3>
+              <div className="w-[25%] h-[2%] bg-[#3DC0DF] my-2"></div>
+              <ul role="list" className="mt-4 space-y-2">
+                {navigation.company.map((item) => (
+                  <li key={item.name} className="leading-none">
+                    <a
+                      href={item.href}
+                      className="text-[#fff] text-[18px] no-underline"
+                    >
+                      {item.name}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          
         </div>
-        <div className="madein flex lg:gap-40 lg:flex-row md:flex-col sm:flex-col mt-5 md:gap-10 sm:gap-10" >
-          <div className="india">
-            <img src="/img/image 1.png"></img>
+        <div className="madein flex sm:px-44 px-10 pb-5 lg:gap-40 lg:flex-row md:flex-col sm:flex-col mt-5 md:gap-10 sm:gap-10" >
+            <div className="india">
+              <img src="/img/image 1.png"></img>
+            </div>
+            <div className="intext flex text-[#fff] gap-3 mt-[25px] md:mt-[0px] sm:mt-[25px] ml-[15px]">
+              <p>© Copyright 2021-22</p>
+              <p>The DriveSales™</p>
+              <p className="text-[#ABABAB]">| Privacy Policy</p>
+              <p className="text-[#ABABAB]">Website Terms</p>
+            </div>
           </div>
-          <div className="intext flex text-[#fff] gap-3 mt-[25px] md:mt-[0px] sm:mt-[25px] ml-[15px]">
-            <p>© Copyright 2021-22</p>
-            <p>The DriveSales™</p>
-            <p className="text-[#ABABAB]">| Privacy Policy</p>
-            <p className="text-[#ABABAB]">Website Terms</p>
-          </div>
-        </div>
-      </div>
-    </footer>
+
+      </footer>
+    </>
+
   )
 }

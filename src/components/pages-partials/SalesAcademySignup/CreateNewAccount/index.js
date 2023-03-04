@@ -68,7 +68,7 @@ const CreateNewAccount = ({ dispatch, res }) => {
                                 <div className='newac1 grid grid-cols-2 gap-5'>
                                     <div className='feild1 py-4'>
                                         <label className='mx-2 text-[18px] font-semibold '>Your Name*</label><br></br>
-                                        <input type="text" placeholder='Your Company Name' className="rounded-3xl bg-[#DBDBDB] form-control w-[100%] h-[36px] border-t-0 border-l-0 border-r-0 border-b-0" name="first_name" onChange={handleInput} value={data.first_name} />
+                                        <input type="text" placeholder='Your Name' className="rounded-3xl bg-[#DBDBDB] form-control w-[100%] h-[36px] border-t-0 border-l-0 border-r-0 border-b-0" name="first_name" onChange={handleInput} value={data.first_name} />
                                     </div>
                                     <div className='feild1 py-4'>
                                         <label className='mx-2 text-[18px] font-semibold '>Your Work Email*</label><br></br>

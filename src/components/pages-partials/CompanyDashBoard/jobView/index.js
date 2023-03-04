@@ -44,7 +44,6 @@ const ViewJob = ({ dispatch, res, resdata }) => {
 
     useEffect(() => {
         const data = res.data && res.data.data && res.data.data.data
-        console.log("res:::", data);
         data && setData(data);
 
     }, [res])
@@ -56,7 +55,7 @@ const ViewJob = ({ dispatch, res, resdata }) => {
 
     return (
         <div>
-            <div className='max-w-8xl justify-between items-center sm:px-6 sm:py-4 lg:justify-start lg:space-x-10 '>
+            <div className='max-w-8xl justify-between items-center sm:px-12 sm:py-4 lg:justify-start lg:space-x-10 '>
                 <div className='row flex gap-4'>
                     <ProfileSide />
                     <div className='w-[100%] '>
@@ -72,9 +71,8 @@ const ViewJob = ({ dispatch, res, resdata }) => {
                                                 <div className='flex '>
                                                     <div>
                                                         <p className='text-[24px] font-bold '>{val.company_name}</p>
-                                                        {
-                                                            val.type == "1" ? <p className='text-[18px] text-gray-600 '>{val.position}</p> : null
-                                                        }
+                                                       <p className='text-[18px] text-gray-600 '>{val.position}</p>
+                                                       
                                                     </div>
                                                     <div>
                                                     </div>
@@ -86,19 +84,13 @@ const ViewJob = ({ dispatch, res, resdata }) => {
                                                     <div className=' bg-green-200 text-[18px] py-1 px-2 rounded text-green-800 mb-2'>
                                                         <span><CurrencyRupeeIcon className='mx-1' />{val.salary}</span>
                                                     </div>
-
                                                 </div>
                                                 <div>
                                                     <span className='font-bold'>Vacancy :</span> <span>{val.vacancy}</span>
                                                 </div>
-                                                <div className='flex gap-2'>
-                                                    <span className='font-bold'>salary :</span> <span>{val.salary}</span>
-                                                </div>
-
                                                 <div>
                                                     <span className='font-bold'>Description :</span> <span>{val.description}</span>
-                                                </div>
-
+                                                </div>  
                                             </div>
                                             <div className='py-2 lg-10'>
                                                 <div className='flex ' >
@@ -108,8 +100,9 @@ const ViewJob = ({ dispatch, res, resdata }) => {
                                                                 Active
                                                             </button>  {dropdown == index + 1 ? <div className='flex flex-col shadow px-3 '>
 
-                                                                <NextLink href={`/company-dashboard/job-view/job-update/${val._id}`} onClick={() => localStorage.setItem("jobId", val._id)} className="cursor-pointer">edit</NextLink>
-                                                                <button onClick={() => handleOpen(val._id)} className="cursor-pointer">view</button>
+                                                                <NextLink href={`/company-dashboard/job-view/job-update/${val._id}`} onClick={() => localStorage.setItem("jobId", val._id)} className="cursor-pointer border-b-2">Edit</NextLink>
+                                                                <button onClick={() => handleOpen(val._id)} className="cursor-pointer border-b-2">view</button>
+                                                                <NextLink href={`/company-dashboard/job-view/job-apply/${val._id}`} onClick={() => localStorage.setItem("jobId", val._id)} className="cursor-pointer border-b-2">Apply</NextLink>
                                                                 <div onClick={() => setdropdown(0)}>
                                                                     Close
                                                                 </div>
@@ -118,8 +111,9 @@ const ViewJob = ({ dispatch, res, resdata }) => {
                                                                 Unactive
                                                             </button>
                                                             {dropdown == index + 1 ? <div className='flex flex-col shadow px-3'>
-                                                                <NextLink href={`/company-dashboard/job-view/job-update/${val._id}`} onClick={() => localStorage.setItem("jobId", val._id)} className="cursor-pointer">edit</NextLink>
-                                                                <button onClick={() => handleOpen(val._id)} className="cursor-pointer">view</button>
+                                                                <NextLink href={`/company-dashboard/job-view/job-update/${val._id}`} onClick={() => localStorage.setItem("jobId", val._id)} className="cursor-pointer border-b-2">Edit</NextLink>
+                                                                <div onClick={() => handleOpen(val._id)} className="cursor-pointer border-b-2">view</div>
+                                                                <NextLink href={`/company-dashboard/job-view/job-apply/${val._id}`} onClick={() => localStorage.setItem("jobId", val._id)} className="cursor-pointer border-b-2">Apply</NextLink>
                                                                 <div onClick={() => setdropdown(0)} className="cursor-pointer">
                                                                     Close
                                                                 </div>

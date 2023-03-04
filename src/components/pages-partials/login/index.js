@@ -1,10 +1,10 @@
-import SecondSharedLayout from '../../layout/shared-layout/SecondSharedLayout'
+import FormSharedLayout from '../../layout/shared-layout/FormSharedLayout'
 import FixPart from './FixPart'
 import LoginForm from './LoginForm'
 
 const Login = () => {
   return (
-    <SecondSharedLayout>
+    <FormSharedLayout>
       <div className='grid flex lg:grid-cols-2 md:grid-cols-1 sm:col-auto'>
         <div className=''>
           <FixPart />
@@ -13,7 +13,7 @@ const Login = () => {
           <LoginForm />
         </div>
       </div>
-    </SecondSharedLayout>
+    </FormSharedLayout>
   )
 }
 export default Login

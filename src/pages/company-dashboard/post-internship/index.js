@@ -1,13 +1,13 @@
-import SecondSharedLayout from '../../../components/layout/shared-layout/SecondSharedLayout'
+import FormSharedLayout from '../../../components/layout/shared-layout/FormSharedLayout'
 import MainPostInternship from "../../../components/pages-partials/CompanyDashBoard/postinternship"
 import React from 'react'
 
 const postInternship = () => {
   return (
     <div>
-      <SecondSharedLayout>
+      <FormSharedLayout>
         <MainPostInternship />
-      </SecondSharedLayout>
+      </FormSharedLayout>
     </div>
   )
 }

@@ -33,3 +33,13 @@ export function userProfileRemoveReducer(state = initialState, action) {
             return state;
     }
 }
+// USER CAREER DETAIL UPDATE
+
+export function careerDetailUpadteReducer(state = initialState, action) {
+    switch (action.type) {
+        case "CAREER_UPADTE":
+            return { data: action.payload, loading: false };
+        default:
+            return state;
+    }
+}

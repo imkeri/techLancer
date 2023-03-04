@@ -4,7 +4,8 @@ import { connect } from 'react-redux'
 import { internshipPost } from '../../../../store/action/compuny/AddData'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import ProfileSide from '../Profile/Index'
+import ProfileSide from '../Profile/Index';
+import Router from 'next/router'
 
 const PostIntern = ({ dispatch, res }) => {
     const [data, setData] = useState({
@@ -44,15 +45,17 @@ const PostIntern = ({ dispatch, res }) => {
 
     useEffect(() => {
         const data = res.data && res.data.data
-        console.log("res", data)
-        if (data) {
+        if (data && data.code == 201) {
             if (data.code == 201) {
                 toast.success(data.message, {
                     position: toast.POSITION.TOP_CENTER,
 
                 });
-
+               
             }
+            setTimeout(() => {
+                Router.push('internship-view')
+            }, 1500);
             
         }
     }, [res])
@@ -60,8 +63,8 @@ const PostIntern = ({ dispatch, res }) => {
     return (
         <div>
             <ToastContainer />
-            <div className='max-w-8xl justify-between items-center sm:px-6 sm:py-2  lg:justify-start lg:space-x-10 '>
-                <div className='row flex gap-4'>
+            <div className='max-w-8xl mx-auto justify-between items-center sm:px-12 px-10 sm:px-6 sm:py-4  lg:justify-start lg:space-x-10 '>
+                <div className='row flex gap-8'>
                     <ProfileSide />
                     <div className='w-[100%] '>
                     <div className='max-w-5xl mx-auto justify-between items-center px-0 mt-14 sm:px-6 sm:py-4 lg:px-8 lg:justify-start lg:space-x-10  mb-[50px] rounded'>

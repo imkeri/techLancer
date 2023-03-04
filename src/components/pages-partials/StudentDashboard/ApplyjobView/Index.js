@@ -18,7 +18,7 @@ const StudDashboard = ({ dispatch, res }) => {
         console.log("heloooooo;", data)
         data && setData(data)
     }, [res])
-    console.log("darta:::::::::::::", data)
+
 
 
     return (
@@ -29,11 +29,11 @@ const StudDashboard = ({ dispatch, res }) => {
                     <Profile />
                     <div className='mt-10 sm:px-12 px-4 w-[100%]'>
                         <h1 className='text-[24px] text-center font-bold'> YOU APPLYED FOR THIS JOBS</h1>
-                        <div className=' '>
+                        <div className=' grid grid-cols-2 gap-6'>
                             {
-                                data && data.map((val,key) => {
+                                data ? data.map((val, key) => {
                                     return <>
-                                        <div className='flex sm:px-10 px-4 py-4 mt-6 justify-between border-b-2 my-3  bg-gray-50 shadow-xl'>
+                                        <div className='flex sm:px-10 px-4 py-4 mt-6 justify-between border-b-2 my-3  bg-gray-50 shadow-xl border'>
                                             <div className=''>
                                                 <h2 className='text-[24px] font-bold text-gray-900'>{val.company_name}</h2>
                                                 <p className='text-[16px] mb-2 text-gray-700'>{val.company_city}</p>
@@ -41,10 +41,21 @@ const StudDashboard = ({ dispatch, res }) => {
                                                 <p className='text-[18px] mb-2'>{val.position}</p>
                                             </div>
                                             <div className='self-center'>
-                                                <button className='px-3 py-2 text-gray-600 bg-blue-600 text-[#ffff] rounded'>Status</button>
+                                                {
+                                                    val.status == 1 && <button className='px-3 py-2 text-gray-600 bg-slate-600 text-[#ffff] rounded'>Apply</button>
+                                                }
+                                                {
+                                                    val.status == 2 && <button className='px-3 py-2 text-gray-600 bg-blue-600 text-[#ffff] rounded'>process</button>
+                                                }
+                                                {
+                                                    val.status == 3 && <button className='px-3 py-2 text-gray-600 bg-green-600 text-[#ffff] rounded'>success</button>
+                                                }
+                                                 {
+                                                    val.status == 4 && <button className='px-3 py-2 text-gray-600 bg-red-600 text-[#ffff] rounded'>success</button>
+                                                }
                                             </div>
                                         </div></>
-                                })
+                                }) : <h1 className='capitalize'>You are not applyed in any job</h1>
                             }
                         </div>
                     </div>

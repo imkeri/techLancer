@@ -55,7 +55,7 @@ const UpdateJob = ({ dispatch, res, updateres }) => {
     return (
         <>
             <ToastContainer />
-            <div className='max-w-8xl  justify-between items-center  sm:px-6 sm:py-4  lg:justify-start lg:space-x-10 '>
+            <div className='max-w-8xl  justify-between items-center  sm:px-12 sm:py-4  lg:justify-start lg:space-x-10 '>
                 <div className='row flex gap-4'>
                     <ProfileSide/>
                     <div className='w-[100%] '>

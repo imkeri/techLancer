@@ -1,12 +1,12 @@
 import FormSharedLayout from '../../../../components/layout/shared-layout/FormSharedLayout'
-import UpdateJob from '../../../../components/pages-partials/CompanyDashBoard/job-update/index'
+import UseApply from '../../../../components/pages-partials/CompanyDashBoard/UseApply'
 import React from 'react'
 
 const relocateyes = () => {
   return (
     <div>
       <FormSharedLayout>
-        <UpdateJob />
+        <UseApply />
       </FormSharedLayout>
     </div>
   )

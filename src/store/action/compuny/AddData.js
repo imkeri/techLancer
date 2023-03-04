@@ -143,7 +143,6 @@ export function jobPrefrenceAdd(data) {
 
 // INTERNSHIP POST
 
-
 export function internshipPost(data){
     console.log("dat::::",data)
     return async (dispatch) => {
@@ -171,3 +170,61 @@ export function internshipPost(data){
     };
 }
 
+
+// INTERVIEW LINK JOB
+
+export function internviewLinkGenrate(id,data){
+   
+    return async (dispatch) => {
+       try {
+        const response = await axios.post(`${Baseurl}/applies/take-action-job/${id}`, data,{
+            headers:{
+                "Authorization":token
+            }
+        });
+        console.log("response:::",response)
+
+        var return_response = {
+            type: "INTERVIEW_LINK",
+            payload: response,
+        };
+        dispatch(return_response);
+       } catch (error) {
+        console.log("error:::",error)
+        var return_response = {
+            type: "INTERVIEW_LINK",
+            payload: error,
+        };
+        dispatch(return_response);
+       }
+    };
+}
+
+// INTERVIEW LINK INTERNSHIP
+
+export function internviewLinkInternshipGenrate(id,data){
+   
+    return async (dispatch) => {
+       try {
+        const response = await axios.post(`${Baseurl}/applies/take-action-intern/${id}`, data,{
+            headers:{
+                "Authorization":token
+            }
+        });
+        console.log("response:::",response)
+
+        var return_response = {
+            type: "INTERVIEW_LINK_INTRENSHIP",
+            payload: response,
+        };
+        dispatch(return_response);
+       } catch (error) {
+        console.log("error:::",error)
+        var return_response = {
+            type: "INTERVIEW_LINK_INTRENSHIP",
+            payload: error,
+        };
+        dispatch(return_response);
+       }
+    };
+}

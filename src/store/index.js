@@ -7,7 +7,9 @@ import {
     forgetPasswordReducer,
     addCompanyProfileReducer,
     jobPrefrenceAddReducer,
-    internshipPostReducer
+    internshipPostReducer,
+    internviewLinkGenrateReducer,
+    internviewLinkInternshipGenrateReducer,
 } from './reducer/company/AddReducer';
 
 import {
@@ -19,7 +21,8 @@ import {
     CompanyIternshipPostUpdateReducer
 } from "./reducer/company/UpdateReducer"
 
-import { getCompanyProfileReducer,
+import {
+    getCompanyProfileReducer,
     jobPrefrenceViewReducer,
     jobPrefrenceViewByIdReducer,
     jobPrefrenceViewByCompanyReducer,
@@ -31,7 +34,10 @@ import { getCompanyProfileReducer,
     jobViewByLocationReducer,
     jobViewByTechnologyReducer,
     jobViewBypositionReducer,
-    fetchApplyCountReducer} from "./reducer/company/GetReducer"
+    fetchApplyCountReducer,
+    fetchAlluserAppledListReducer,
+    fetchInternshipApplyListReducer
+} from "./reducer/company/GetReducer"
 
 
 
@@ -42,23 +48,30 @@ import {
     userLoginReducer,
     addUserProfileReducer,
     applyInternshipReducer,
-    applyJobReducer
+    applyJobReducer,
+    addCareerDetailsReducer,
+    addEnrollReducer
 } from './reducer/user/Addreducer'
 
-import { getUserProfileReducer,
-    getAllTeacherReducer ,
+import {
+    getUserProfileReducer,
+    getAllTeacherReducer,
     fetchApplyJobDataReducer,
     fetchApplyInternshipDataReducer,
-    fetchfaqReducer} from './reducer/user/GetReducer'
+    fetchfaqReducer,
+    fetchTimeLectureReducer,
+    fetchCareerDtailByIdReducer
+} from './reducer/user/GetReducer'
 
 import {
     userProfileUpadteReducer,
     userChangePasswordReducer,
-    userProfileRemoveReducer
+    userProfileRemoveReducer,
+    careerDetailUpadteReducer
 } from './reducer/user/UpdateReducer'
 
 
-import {fetchtermWiseViewReducer,fetchtCourseDetailReducer} from './reducer/Comman/getReducer'
+import { fetchtermWiseViewReducer, fetchtCourseDetailReducer } from './reducer/Comman/getReducer'
 
 const rootReducer = combineReducers({
     // add company---------------
@@ -66,57 +79,71 @@ const rootReducer = combineReducers({
     compunyLogin: companyLoginReducer,
     forgetPassword: forgetPasswordReducer,
     addCompanyProfile: addCompanyProfileReducer,
-    jobPrefrenceAdd:jobPrefrenceAddReducer,
-    internshipPost:internshipPostReducer,
+    jobPrefrenceAdd: jobPrefrenceAddReducer,
+    internshipPost: internshipPostReducer,
+    internviewLinkGenrate:internviewLinkGenrateReducer,
+    internviewLinkInternshipGenrate:internviewLinkInternshipGenrateReducer,
 
     // fetch company data---------
     fetchCompanyView: getCompanyProfileReducer,
-    jobPrefrenceView:jobPrefrenceViewReducer,
-    jobPrefrenceViewById:jobPrefrenceViewByIdReducer,
-    jobPrefrenceViewByCompany:jobPrefrenceViewByCompanyReducer, 
-    internshipViewByCompany:internshipViewByCompanyReducer,
-    internshipViewById:internshipViewByIdReducer,
-    internshipViewAll:internshipAllViewCompanyReducer,
-    internshipViewByLocation:internshipViewByLocationReducer,
-    internshipViewByTechnology:internshipViewByTechnologyReducer,
-    jobViewByLocation:jobViewByLocationReducer,
-    jobViewByTechnology:jobViewByTechnologyReducer,
-    jobViewByposition:jobViewBypositionReducer,
-    fetchApplyCount:fetchApplyCountReducer,
+    jobPrefrenceView: jobPrefrenceViewReducer,
+    jobPrefrenceViewById: jobPrefrenceViewByIdReducer,
+    jobPrefrenceViewByCompany: jobPrefrenceViewByCompanyReducer,
+    internshipViewByCompany: internshipViewByCompanyReducer,
+    internshipViewById: internshipViewByIdReducer,
+    internshipViewAll: internshipAllViewCompanyReducer,
+    internshipViewByLocation: internshipViewByLocationReducer,
+    internshipViewByTechnology: internshipViewByTechnologyReducer,
+    jobViewByLocation: jobViewByLocationReducer,
+    jobViewByTechnology: jobViewByTechnologyReducer,
+    jobViewByposition: jobViewBypositionReducer,
+    fetchApplyCount: fetchApplyCountReducer,
+    fetchAllapplyList: fetchAlluserAppledListReducer,
+    fetchInternshipApplyList:fetchInternshipApplyListReducer,
 
     // company update------------
-    changePassword:changePasswordReducer,
-    resetPassword:resetPasswordReducer,
-    CompanyProfileUpadte:CompanyProfileUpadteReducer,
-    CompanyProfileRemove:CompanyProfileRemoveReducer,
-    CompanyJobPostUpdate:jobPrefrenceUpdateReducer,
-    CompanyIternshipPostUpdate:CompanyIternshipPostUpdateReducer,
+    changePassword: changePasswordReducer,
+    resetPassword: resetPasswordReducer,
+    CompanyProfileUpadte: CompanyProfileUpadteReducer,
+    CompanyProfileRemove: CompanyProfileRemoveReducer,
+    CompanyJobPostUpdate: jobPrefrenceUpdateReducer,
+    CompanyIternshipPostUpdate: CompanyIternshipPostUpdateReducer,
 
     // add user------------------
     userRagistration: userRagistrationReducer,
-    userLogin: userLoginReducer,    
-    addUserProfile:addUserProfileReducer,
-    applyInternship:applyInternshipReducer,
-    applyJob:applyJobReducer,
+    userLogin: userLoginReducer,
+    addUserProfile: addUserProfileReducer,
+    applyInternship: applyInternshipReducer,
+    applyJob: applyJobReducer,
+    addCareerDetails: addCareerDetailsReducer,
+    addEnroll:addEnrollReducer,
+
+
+    //lecture time list 
+
+    fetchTimeLecture:fetchTimeLectureReducer,
+  
 
 
     // fetch user---------
     fetchUserView: getUserProfileReducer,
-    fetchTainerData:getAllTeacherReducer,
-    fetchApplyJobData:fetchApplyJobDataReducer,
-    fetchfaq:fetchfaqReducer,
-    fetchApplyInternshipData:fetchApplyInternshipDataReducer,
+    fetchTainerData: getAllTeacherReducer,
+    fetchApplyJobData: fetchApplyJobDataReducer,
+    fetchfaq: fetchfaqReducer,
+    fetchApplyInternshipData: fetchApplyInternshipDataReducer,
+    fetchCareerDtailById:fetchCareerDtailByIdReducer,
 
     // updare user-------
     userProfileUpadte: userProfileUpadteReducer,
     userChangePassword: userChangePasswordReducer,
-    UserProfileRemove:userProfileRemoveReducer,
+    UserProfileRemove: userProfileRemoveReducer,
+    careerDetailUpadte:careerDetailUpadteReducer,
 
 
     // COMMAN 
 
-    fetchtermWiseView:fetchtermWiseViewReducer,
-    fetchtCourseDetail:fetchtCourseDetailReducer,
+    fetchtermWiseView: fetchtermWiseViewReducer,
+    fetchtCourseDetail: fetchtCourseDetailReducer,
 
 
 

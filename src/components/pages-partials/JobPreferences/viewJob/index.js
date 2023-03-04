@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
-import NextLink from 'next/link'
 import { jobPrefrenceView, jobViewByLocation, jobViewByTechnology, jobViewByposition } from '../../../../store/action/compuny/GetData'
 import { applyJob } from '../../../../store/action/user/AddData';
 import { ToastContainer, toast } from 'react-toastify';
@@ -11,7 +10,6 @@ import 'react-toastify/dist/ReactToastify.css';
 const ViewJob = ({ dispatch, res, searchres, searchtech, searchposi, apply }) => {
 
     const [data, setData] = useState([])
-    const [search, setSearch] = useState("")
 
     useEffect(() => {
         dispatch(jobPrefrenceView())
@@ -19,7 +17,6 @@ const ViewJob = ({ dispatch, res, searchres, searchtech, searchposi, apply }) =>
 
     useEffect(() => {
         const data = res.data && res.data.data && res.data.data.data
-        console.log("res:::", data);
         data && setData(data);
     }, [res])
 
@@ -44,7 +41,6 @@ const ViewJob = ({ dispatch, res, searchres, searchtech, searchposi, apply }) =>
     useEffect(() => {
         const data = searchtech.data && searchtech.data.data && searchtech.data.data.data
         data && setData(data)
-        console.log("data::::", data)
     }, [searchtech])
 
     useEffect(() => {
@@ -58,10 +54,21 @@ const ViewJob = ({ dispatch, res, searchres, searchtech, searchposi, apply }) =>
     }
     useEffect(()=>{
         const data= apply.data && apply.data.data 
-        console.log("data:::::::::::::::::::",data)
         if(data)
         {
             if (data.code == 201) {
+                toast.success(data.message, {
+                    position: toast.POSITION.TOP_CENTER,
+
+                });
+            }
+            if (data.code == 401) {
+                toast.success(data.message, {
+                    position: toast.POSITION.TOP_CENTER,
+
+                });
+            }
+            if (data.code == 500) {
                 toast.success(data.message, {
                     position: toast.POSITION.TOP_CENTER,
 
@@ -92,8 +99,8 @@ const ViewJob = ({ dispatch, res, searchres, searchtech, searchposi, apply }) =>
                                         <p className='text-[24px] text-gray-900 font-bold'>{val.company_name}</p>
                                         <p className='text-[18px] text-gray-600 pb-4'>{val.position}</p>
                                         <p>starting Salary : <span className='font-bold'>{val.salary}</span></p>
-                                        <p>We need some technology like {val.technology}</p>
-                                        <p className='mb-2'>{val.description}</p>
+                                        <p>We need some technology :<spna className="font-bold">{val.technology}</spna></p>
+                                        <p className='mb-2 h-[100px] my-3 text-ellipsis overflow-hidden'>{val.description}</p>
                                         <div>
                                             {
                                                 val.active == '1' && <button className='bg-blue-700 text-[#fff] px-3 py-2 mt-3 rounded' onClick={(e) => ApplyJob(val._id)}>Apply</button>

@@ -75,15 +75,26 @@ const ViewInternship = ({ dispatch, res,searchres ,searchtech,resbyid,apply}) =>
       },[searchtech])
 
       const ApplyIntership=(id)=>{
-        
         dispatch(applyInternship(id))
       }
+
       useEffect(()=>{
         const data= apply.data && apply.data.data 
-        console.log("data:::::::::::::::::::",data)
         if(data)
         {
             if (data.code == 201) {
+                toast.success(data.message, {
+                    position: toast.POSITION.TOP_CENTER,
+
+                });
+            }
+            if (data.code == 401) {
+                toast.success(data.message, {
+                    position: toast.POSITION.TOP_CENTER,
+
+                });
+            }
+            if (data.code == 403) {
                 toast.success(data.message, {
                     position: toast.POSITION.TOP_CENTER,
 
@@ -113,7 +124,7 @@ const ViewInternship = ({ dispatch, res,searchres ,searchtech,resbyid,apply}) =>
                                                     <div>
                                                         <p className='text-[24px] font-bold '>{val.company_name}</p>
                                                         {
-                                                            val.type == "1" ? <p className='text-[18px] text-gray-600 '>{val.city}</p> :<p></p>
+                                                            val.type == "1" ? <p className='text-[18px] text-gray-600 '>{val.address}</p> :<p></p>
                                                         }
                                                     </div>
                                                     <div>
@@ -198,7 +209,7 @@ const ViewInternship = ({ dispatch, res,searchres ,searchtech,resbyid,apply}) =>
                         <h1 className='font-bold text-[30px] text-center'><span></span> {internship.company_name}</h1><hr></hr>
                         <div className='sm:px-20 px-10 py-6'>
                            
-                        <span className=' font-bold'>City : </span><span>{internship.city}</span>
+                        <span className=' font-bold'>City : </span><span>{internship.address}</span>
                             <div className='mt-2'>
                                 <span className=' font-bold'>Technology : </span><span>{internship.technology}</span>
                             </div>
@@ -245,6 +256,10 @@ const ViewInternship = ({ dispatch, res,searchres ,searchtech,resbyid,apply}) =>
                                         </div>
                                     }
                                 </div>
+                            </div>
+                            <div>
+                                <p className='font-bold'>description :</p>
+                                {internship.description}
                             </div>
                         </div>
                     </div>

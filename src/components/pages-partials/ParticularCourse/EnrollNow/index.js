@@ -1,190 +1,130 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { connect } from 'react-redux';
+import { addEnroll } from "../../../../store/action/user/AddData"
+import { fetchTimeLecture } from '../../../../store/action/user/GetData';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Cookies from "js-cookie";
+import Router from 'next/router'
 
-const EnrollNow = () => {
-    const [openTab, setOpenTab] = React.useState(1);
+const EnrollNow = ({ dispatch, res, adderoll }) => {
+
+    const [massage, setMassge] = useState([]);
+    const [time, setTime] = useState([])
+
+
+
+    useEffect(() => {
+        const data = res.data && res.data.data && res.data.data.data
+        data && setTime(data);
+
+    }, [res])
+
+
+
+    useEffect(() => {
+        const course_id = localStorage.getItem("courseId")
+        dispatch(fetchTimeLecture(course_id))
+    }, []);
+
+    const EnrollAdd = (e, id, code) => {
+        e.preventDefault();
+        const token = Cookies.get('token')
+        if (!token) {
+            Router.push('/student-login')
+        }
+        else {
+            const userid = Cookies.get('userId')
+            dispatch(addEnroll({ "course_id": id, "user_id": userid, "code": code }))
+        }
+    }
+
+    useEffect(() => {
+
+        const data = adderoll.data && adderoll.data.data
+        data && setMassge(data)
+
+
+    }, [adderoll])
+
+    useEffect(() => {
+           if(massage)
+           {
+            if (massage.code === 201) {
+                toast.success(massage.message, {
+                    position: toast.POSITION.TOP_CENTER,
+
+                });
+            }
+            else if (massage.code === 406) {
+                toast.warning(massage.message, {
+                    position: toast.POSITION.TOP_CENTER,
+
+                });
+            }
+           }
+    }, [massage])
+
     return (
         <div>
-            <div className='max-w-7xl mx-auto justify-between items-center px-4 py-5 sm:px-6 sm:py-4 lg:px-6 lg:justify-start  mt-[20px]'>
+            <ToastContainer />
+            <div className='max-w-7xl mx-auto justify-between items-center px-2 py-5 sm:px-6 sm:py-4 lg:px-6 lg:justify-start  mt-[20px]'>
                 <h1 className='text-left text-[35px] font-semibold'>Enroll Now!</h1>
                 <div className="schedual1">
                     <div className="">
-                        <ul
-                            className="flex mb-0 list-none  pt-3 pb-4  pl-0"
-                            role="tablist"
-                        >
-                            <li className="last:mr-0 mr-5 ">
-                                <a
-                                    className={
-                                        "text-xs font-bold uppercase py-2 px-5 shadow-lg rounded leading-normal no-underline " +
-                                        (openTab === 1
-                                            ? "text-white bg-[#3DC0DF]"
-                                            : "text-[#3DC0DF] bg-white border-2 border-[#3DC0DF]")
-                                    }
-                                    onClick={e => {
-                                        e.preventDefault();
-                                        setOpenTab(1);
-                                    }}
-                                    data-toggle="tab"
-                                    href="#link1"
-                                    role="tablist"
-                                >
-                                    Show All
-                                </a>
-                            </li>
-                            <li className=" last:mr-0 mr-5  ">
-                                <a
-                                    className={
-                                        "text-xs font-bold uppercase py-2 px-5 shadow-lg rounded leading-normal no-underline  " +
-                                        (openTab === 2
-                                            ? "text-white bg-[#3DC0DF]"
-                                            : "text-[#3DC0DF] bg-white border-2 border-[#3DC0DF]")
-                                    }
-                                    onClick={e => {
-                                        e.preventDefault();
-                                        setOpenTab(2);
-                                    }}
-                                    data-toggle="tab"
-                                    href="#link1"
-                                    role="tablist"
-                                >
-                                    Part-time
-                                </a>
-                            </li>
-                            <li className="last:mr-0 mr-5 ">
-                                <a
-                                    className={
-                                        "text-xs font-bold uppercase py-2 px-5 shadow-lg rounded leading-normal no-underline  " +
-                                        (openTab === 3
-                                            ? "text-white bg-[#3DC0DF]"
-                                            : "text-[#3DC0DF] bg-white border-2 border-[#3DC0DF]")
-                                    }
-                                    onClick={e => {
-                                        e.preventDefault();
-                                        setOpenTab(3);
-                                    }}
-                                    data-toggle="tab"
-                                    href="#link1"
-                                    role="tablist"
-                                >
-                                    Full-time
-                                </a>
-                            </li>
-                        </ul>
                         <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 rounded">
-                            <div className="px-4 py-5 flex-auto">
+                            <div className="sm:px-4 pt-4 flex-auto">
                                 <div className="tab-content tab-space">
-                                    <div className={openTab === 1 ? "block" : "hidden"} id="link1">
-                                        <div className='row mx-5'>
-                                            <div className='col-md-4'>
+                                    <div id="link1">
+                                        <div className='grid grid-cols-7  sm:place-content-center'>
+                                            <div className='col-span-2 sm:place-self-center'>
                                                 <p className='text-[18px] font-semibold'>DATES</p>
                                             </div>
-                                            <div className='col-md-3'>
+                                            <div className='col-span-2 sm:place-self-center'>
                                                 <p className='text-[18px] font-semibold'>HOURS</p>
                                             </div>
-                                            <div className='col-md-5'>
-                                                <p className='text-[18px] font-semibold'>INSTRUCTOR</p>
+                                            <div className='col-span-2 sm:place-self-center'>
+                                                <p className='text-[18px] font-semibold'>COURSE NAME</p>
                                             </div>
                                         </div>
                                         <hr className='m-0'></hr>
-                                        <div className='row mx-5 mt-3'>
-                                            <div className='col-md-4'>
-                                                <div className='flex flex-col'>
-                                                    <p className='text-[18px] font-semibold'>October 10-December 1</p>
-                                                    <p className='text-[15px] font-semibold'>Part-time, Mondays and Wednesdays</p>
-                                                </div>
-                                            </div>
-                                            <div className='col-md-3'>
-                                                <div className='flex flex-col'>
-                                                    <p className='text-[18px] font-semibold'>11:00 PM-1:00 AM</p>
-                                                    <p className='text-[15px]'>Time Zone: Asia/Calcutta</p>
-                                                </div>
-                                            </div>
-                                            <div className='col-md-5'>
-                                                <div className='lastcl flex justify-between '>
-                                                    <div className='float-start'>
-                                                        <p></p>
-                                                    </div>
-                                                    <div className='mt-3'>
-                                                        <button className='float-start bg-[#3DC0DF] text-[#fff] text-[15px] px-2 py-1 rounded text-center hover:bg-[#fff] hover:text-[#3DC0DF] hover:border hover:border-[#3DC0DF]'>SOLD OUT</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <hr className='m-0'></hr>
-                                        <div className='row mx-5 mt-3'>
-                                            <div className='col-md-4'>
-                                                <div className='flex flex-col'>
-                                                    <p className='text-[18px] font-semibold'>October 12-December 9</p>
-                                                    <p className='text-[15px] font-semibold'>Part-time, Tuesdays and Thursdays</p>
-                                                </div>
-                                            </div>
-                                            <div className='col-md-3'>
-                                                <div className='flex flex-col'>
-                                                    <p className='text-[18px] font-semibold'>6:00 AM-8:00 AM</p>
-                                                    <p className='text-[15px]'>Time Zone: Asia/Calcutta</p>
-                                                </div>
-                                            </div>
-                                            <div className='col-md-5'>
-                                                <div className='lastcl flex justify-between'>
-                                                    <div className='float-start'>
-                                                        <p className='text-[15px] font-semibold'>To Be Announced.</p>
-                                                    </div>
-                                                    <div className='mt-3'>
-                                                        <button className='float-start bg-[#3DC0DF] text-[#fff] text-[15px] px-2 py-1 rounded text-center hover:bg-[#fff] hover:text-[#3DC0DF] hover:border hover:border-[#3DC0DF]'>Enroll Now</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <hr className='m-0'></hr>
-                                        <div className='row mx-5 mt-3'>
-                                            <div className='col-md-4'>
-                                                <div className='flex flex-col'>
-                                                    <p className='text-[18px] font-semibold'>October 15-December 18</p>
-                                                    <p className='text-[15px] font-semibold'>Part-time, Saturdays</p>
-                                                </div>
-                                            </div>
-                                            <div className='col-md-3'>
-                                                <div className='flex flex-col'>
-                                                    <p className='text-[18px] font-semibold'>8:30 PM-1:30 AM</p>
-                                                    <p className='text-[15px]'>Time Zone: Asia/Calcutta</p>
-                                                </div>
-                                            </div>
-                                            <div className='col-md-5'>
-                                                <div className='lastcl flex justify-between'>
-                                                    <div className='float-start w-[200px]'>
-                                                        <p className='text-[15px] font-semibold'>Top Instructor &
-                                                            Group Product Manager
-                                                            at Apple.
-                                                            Formerly at eBay.</p>
-                                                    </div>
-                                                    <div className='mt-3'>
-                                                        <button className='float-start bg-[#3DC0DF] text-[#fff] text-[15px] px-2 py-1 rounded text-center hover:bg-[#fff] hover:text-[#3DC0DF] hover:border hover:border-[#3DC0DF]'>Enroll Now</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <hr className='m-0'></hr>
-                                        <div className={openTab === 2 ? "block" : "hidden"} id="link2">
-                                            <p>
-                                                Completely synergize resource taxing relationships via
-                                                premier niche markets. Professionally cultivate one-to-one
-                                                customer service with robust ideas.
-                                                <br />
-                                                <br />
-                                                Dynamically innovate resource-leveling customer service for
-                                                state of the art customer service.
-                                            </p>
-                                        </div>
-                                        <div className={openTab === 3 ? "block" : "hidden"} id="link3">
-                                            <p>
-                                                Efficiently unleash cross-media information without
-                                                cross-media value. Quickly maximize timely deliverables for
-                                                real-time schemas.
-                                                <br />
-                                                <br /> Dramatically maintain clicks-and-mortar solutions
-                                                without functional solutions.
-                                            </p>
-                                        </div>
+                                        {
+                                            time.map((val, key) => {
+                                                return (
+                                                    <>
+                                                        <div className='grid grid-cols-7  py-2 sm:place-content-center gap-2'>
+                                                            <div className='col-span-2 sm:place-self-center '>
+                                                                <div className='flex flex-col'>
+                                                                    <p className='md:text-[18px] font-semibold text-[15px] mb-2' >{val.start_date} to {val.end_date}</p>
+                                                                    <p className='md:text-[15px] text-[12px] mb-0'><span className='font-bold capitalize'>{val.day[0]}</span> to <span className='font-bold capitalize'>{val.day[1]}</span></p>
+                                                                </div>
+                                                            </div>
+                                                            <div className='col-span-2 sm:place-self-center'>
+                                                                <div className='flex flex-col'>
+                                                                    <p className='md:text-[18px] font-semibold text-[15px] mb-2'>{val.start_time}PM to {val.end_time}PM</p>
+                                                                    <p className='md:text-[15px] text-[12px] mb-0 capitalize'>{val.timezone}</p>
+                                                                </div>
+                                                            </div>
+                                                            <div className='col-span-2'>
+                                                                <div className='text-center py-3'>
+                                                                    <p className='md:text-[15px] font-semibold text-[12px] mb-0 capitalize'>{val.course_name}</p>
+                                                                </div>
+                                                            </div>
+                                                            <div className='col-span-1'>
+                                                                <div className='mt-3'>
+                                                                    {
+                                                                        val.slot <= 0 ? <button className='float-start bg-[#3DC0DF] text-[#fff] text-[15px] px-2 py-1 rounded text-center hover:bg-[#fff] hover:text-[#3DC0DF] hover:border hover:border-[#3DC0DF]' onClick={(e) => EnrollAdd(e, val.course_id)}>SOLD OUT</button> : <button className='float-start bg-[#3DC0DF] text-[#fff] text-[15px] md:px-3 md:py-2 rounded text-center hover:bg-[#fff] hover:text-[#3DC0DF] hover:border hover:border-[#3DC0DF] capitalize' onClick={(e) => EnrollAdd(e, val.course_id, val.code)}>Enroll now</button>
+                                                                    }
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                        <hr></hr>
+                                                    </>
+                                                )
+                                            })
+                                        }
+
                                     </div>
                                 </div>
                             </div>
@@ -192,8 +132,13 @@ const EnrollNow = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     )
 }
 
-export default EnrollNow
+const mapStateToProps = (state) => ({
+    res: state.fetchTimeLecture,
+    adderoll: state.addEnroll
+})
+
+export default connect(mapStateToProps)(EnrollNow)

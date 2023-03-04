@@ -25,10 +25,10 @@ export default function Hero() {
                   </div>
                   <div className='homebtn flex items-center lg:inline-flex items-center md:inline-flex items-center sm:inline-flex items-center'>
                     <div className='apply text-[18px] font-extrablod text-[#fff] mr-3'>
-                     <NextLink href="/sales-academy"> <button className='applybtn px-[10px] py-[8px]' onClick={()=>localStorage.setItem('joinAs',"user")}>Apply as Sales Talent</button></NextLink>
+                     <NextLink href="/sales-academy"> <button className='applybtn px-[10px] py-[8px]' >Apply as Sales Talent</button></NextLink>
                     </div>
                     <div className='apply text-[18px] font-extrablod text-[#fff] mr-3'>
-                      <NextLink href="/company"><button className='applybtn px-[10px] py-[8px]' onClick={()=>localStorage.setItem('joinAs',"company")}>Hire sales talent</button></NextLink>
+                      <NextLink href="/company"><button className='applybtn px-[10px] py-[8px]'>Hire sales talent</button></NextLink>
                     </div>
           
                   </div>

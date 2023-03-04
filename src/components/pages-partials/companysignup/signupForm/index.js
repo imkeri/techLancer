@@ -64,7 +64,6 @@ const CompSignUp = ({ dispatch, res }) => {
         }
        
        }
-       console.log(data)
     }
 
     return (
@@ -96,7 +95,7 @@ const CompSignUp = ({ dispatch, res }) => {
                         <select className='form-control w-[100%] rounded-3xl bg-[#DBDBDB] form-control w-[100%] h-[36px]  border-t-0 border-l-0 border-r-0 border-b-0' placeholder='Choose' name='industry_type' onChange={handleInput} value={data.industry_type}>
                             <option value="1" className=''>Choose</option>
                             <option value="Commercial">Commercial</option>
-                            <option value="it">it</option>
+                            <option value="IT">It</option>
                      
                         </select>
                     </div>
@@ -115,8 +114,8 @@ const CompSignUp = ({ dispatch, res }) => {
                         <select className='form-control w-[100%] rounded-3xl bg-[#DBDBDB] form-control w-[100%] h-[36px]  border-t-0 border-l-0 border-r-0 border-b-0' placeholder='Choose' name='your_role' onChange={handleInput} value={data.your_role}>
                             <option value="1" className=''>Choose</option>
                             <option value="CEO">CEO</option>
-                            <option value="founder">founder</option>
-                            <option value="co-founder">co-founder</option>
+                            <option value="founder">Founder</option>
+                            <option value="co-founder">Co-founder</option>
                         </select>
                     </div>
                 </div>
@@ -134,7 +133,7 @@ const CompSignUp = ({ dispatch, res }) => {
                         <input type="text" placeholder='Enter City' className="rounded-3xl bg-[#DBDBDB] form-control w-[100%] h-[36px] border-t-0 border-l-0 border-r-0 border-b-0" onChange={handleInput} name="city" value={data.city}/>
                     </div>
                 </div>
-                <div className='newac1 grid grid-cols-2 cols-span-2'>
+                <div className='newac1 grid grid-cols-2 cols-span-2 gap-5'>
                     <div className='feild1 py-3'>
                         <label className='mx-2 text-[18px] font-semibold '>Your Work Email*</label><br></br>
                         <input type="text" placeholder='Your Work  Email' className="w-[100%] mt-2  rounded-3xl bg-[#DBDBDB] h-[36px] form-control w-[100%] border-t-0 border-l-0 border-r-0 border-b-0" name='email' onChange={handleInput} value={data.email}/>
